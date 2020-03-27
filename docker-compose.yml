@@ -16,6 +16,7 @@ services:
             - "80:80"
             - "443:443"
         volumes:
+            - ./volumes/log/nginx:/var/log/nginx
             - ./volumes/www:/var/www
             - ./volumes/certbot/conf:/etc/letsencrypt
             - ./volumes/certbot:/var/certbot
@@ -87,8 +88,6 @@ services:
             - "8191:8080"
         links:
             - mongodb
-        hostname: assets
-        domainname: assets.assets2.com
   clients:
         build:
             context: ../af-ms-clients
@@ -102,5 +101,17 @@ services:
             - "8193:8080"
         links:
             - mongodb
-        hostname: clients
-        domainname: clients.assets2.com
+  mesh:
+        build:
+            context: ../af-ms-mesh
+        container_name: "af2_mesh"
+        restart: unless-stopped
+        environment:
+            - spring.profiles.active=${spring_profiles_active}
+            - JAVA_OPTS=-Xm2g -Xms2g -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+        ports:
+            - "8004:8000"
+            - "8195:8080"
+        links:
+            - mongodb
+        

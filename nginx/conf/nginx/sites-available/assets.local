@@ -2,7 +2,7 @@ server {
 	listen 80;
 	server_name ~^(.*)-login\.assets\.local$;
 	root /var/www/assets;
-	location ~* ^\/(.*) {
+	location / {
     proxy_set_header Upgrade $http_upgrade;
     proxy_set_header Connection "upgrade";
     proxy_http_version 1.1;
@@ -38,13 +38,13 @@ server {
 
 	# Cors headers needed to fetch manifest file!
 	location ~* ^\/(.*) {
-    proxy_set_header Upgrade $http_upgrade;
-    proxy_set_header Connection "upgrade";
-    proxy_http_version 1.1;
-    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-    proxy_set_header Host $host;
-    proxy_pass http://keycloak;
-  }
+	    proxy_set_header Upgrade $http_upgrade;
+	    proxy_set_header Connection "upgrade";
+	    proxy_http_version 1.1;
+	    proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	    proxy_set_header Host $host;
+	    proxy_pass http://keycloak;
+  	}
 	location = /custom_404.html {
 		internal;
 	}
