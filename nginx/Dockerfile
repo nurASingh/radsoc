@@ -12,9 +12,7 @@ COPY conf/nginx /etc/nginx
 
 RUN /bin/bash -c "mkdir -p /var/log/nginx"
 RUN /bin/bash -c "mkdir -p /etc/nginx/sites-enabled"
-RUN /bin/bash -c "mkdir -p /etc/nginx/ssl"
 RUN /bin/bash -c "mkdir -p /etc/letsencrypt"
-RUN /bin/bash -c "mkdir -p /data/letsencrypt"
 RUN /bin/bash -c "mkdir -p /var/www"
 RUN /bin/bash -c "mkdir -p /data/nginx/cache"
 #COPY www/ /var/www/

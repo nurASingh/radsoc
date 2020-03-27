@@ -1,18 +1,71 @@
-version: '3.1'
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
 
 services:
-    mysql:
-      image: mysql:latest
+  nginx:
+        build:
+            context: ./nginx
+        container_name: "af2_nginx"
+        restart: unless-stopped
+        environment:
+            - spring_profiles_active=${spring_profiles_active}
+        ports:
+            - "80:80"
+            - "443:443"
+        volumes:
+            - ./volumes/www:/var/www
+            - ./volumes/certbot/conf:/etc/letsencrypt
+            - ./volumes/certbot:/var/certbot
+        links:
+            - assets
+            - clients
+        #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    container_name: "af2_certbot"
+    volumes:
+      - ./volumes/certbot/conf:/etc/letsencrypt
+      - ./volumes/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  mysql:
+      image: mysql:5.7
+      restart: unless-stopped
       container_name: "af2_mysql"
-      command: --default-authentication-plugin=mysql_native_password
-      restart: always
-      environment:
-        MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PWD}
       volumes:
-         - ./volumes/mysql/data:/var/lib/mysql
-    mongodb:
+        - mysql_data:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  keycloak:
+      image: quay.io/keycloak/keycloak:7.0.0
+      container_name: "af2_keycloak"
+      restart: unless-stopped
+      ports:
+        - "8189:8080"
+      environment:
+        DB_VENDOR: ${DB_VENDOR}
+        DB_ADDR: ${DB_ADDR}
+        DB_DATABASE: ${DB_DATABASE}
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        KEYCLOAK_USER: ${KEYCLOAK_USER}
+        KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+        JDBC_PARAMS: "useSSL=false&connectTimeout=30000"
+      ports:
+        - 8080:8080
+      depends_on:
+        - mysql
+  mongodb:
         image: mongo:latest
         container_name: "af2_mongodb"
+        restart: unless-stopped
         environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
@@ -21,29 +74,11 @@ services:
         ports:
             - 27017:27017
         command: mongod --bind_ip_all --logpath=/dev/null
-    nginx:
-        build:
-            context: ./nginx
-        container_name: "af2_nginx"
-        environment:
-            - spring_profiles_active=${spring_profiles_active}
-        ports:
-            - "80:80"
-            - "443:443"
-        volumes:
-            - ./volumes/www:/var/www
-            - ./volumes/root/certs-data/:/data/letsencrypt/
-            - ./volumes/etc/letsencrypt/:/etc/letsencrypt/
-            - ./volumes/var/docker/nginx/ssl:/etc/nginx/ssl
-        links:
-            - assets
-            - clients
-        hostname: web1
-        domainname: web1.com
-    assets:
+  assets:
         build:
             context: ../af-ms-assets
         container_name: "af2_assets"
+        restart: unless-stopped
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
@@ -52,11 +87,12 @@ services:
             - "8191:8080"
         links:
             - mongodb
-        hostname: tomcat
-        domainname: ms.springcat.com
-    clients:
+        hostname: assets
+        domainname: assets.assets2.com
+  clients:
         build:
             context: ../af-ms-clients
+        restart: unless-stopped
         container_name: "af2_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -66,5 +102,5 @@ services:
             - "8193:8080"
         links:
             - mongodb
-        hostname: tomcat
-        domainname: ms.springcat.com
+        hostname: clients
+        domainname: clients.assets2.com

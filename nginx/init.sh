@@ -31,20 +31,9 @@ function __init_nginx() {
 
   # Enable all sites
   echo "Enabling sites $profile";
-  if [ "$profile" == "production" ]; then
-	printf "\n- Linking prod files \n";
-    ln -sf "/etc/nginx/sites-available/www.loopbomb.com" "/etc/nginx/sites-enabled"
-  elif [ "$profile" == "staging" ]; then
-	printf "\n- Linking staging files \n";
-    ln -sf "/etc/nginx/sites-available/test.loopbomb.com" "/etc/nginx/sites-enabled"
-  else
-	printf "\n- No profile defined.. $profile \n";
-  	exit 1;
-  fi;
-#  for AVAILABLE_SITE in $(find /etc/nginx/sites-available/*); do
-#    echo "Enabling $AVAILABLE_SITE";
-#    ln -sf "$AVAILABLE_SITE" "/etc/nginx/sites-enabled"
-#  done
+  #ln -sf "/etc/nginx/sites-available/assets.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/assets.local" "/etc/nginx/sites-enabled"
+
   echo "Site enablement completed";
   touch /var/log/access.log
   touch /var/log/error.log

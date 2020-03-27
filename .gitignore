@@ -2,6 +2,10 @@
 node_modules
 /volumes
 /dist
+/certs/*.key
+/certs/*.pem
+/certs/*.csr
+/certs/*.srl
 
 /tests/e2e/videos/
 /tests/e2e/screenshots/
