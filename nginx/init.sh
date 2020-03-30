@@ -33,6 +33,8 @@ function __init_nginx() {
   echo "Enabling sites $profile";
   #ln -sf "/etc/nginx/sites-available/assets.com" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/assets.local" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/api.assets.local" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/login.assets.local" "/etc/nginx/sites-enabled"
 
   echo "Site enablement completed";
   touch /var/log/access.log

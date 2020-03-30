@@ -48,6 +48,7 @@ openssl x509 -req -sha256 -days 1024 -in assets.csr -CA RadicleCA.pem -CAkey Rad
 Copy them into a volume nginx can access
 
 ```
+cd $PROJECT_ROOT/certs
 cp assets.key assets.crt $PROJECT_ROOT/volumes/certbot/local/.
 ```
 

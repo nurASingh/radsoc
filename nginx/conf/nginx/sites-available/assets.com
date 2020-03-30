@@ -28,17 +28,14 @@ server {
 	# Cors headers needed to fetch manifest file!
 	location / {
 	   	try_files $uri $uri/ /index.html;
-		proxy_cache my_cache;
-		add_header 'Access-Control-Allow-Origin' "*" always;
-		add_header 'Access-Control-Allow-Credentials' 'true' always;
-		add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-		add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+			proxy_cache my_cache;
+      include /etc/nginx/include.cors;
 	}
 	location = /custom_404.html {
-		internal;
+		root /var/www/fallback;
 	}
 	error_page 500 502 503 504 /custom_50x.html;
 	location = /custom_50x.html {
-		internal;
+		root /var/www/fallback;
 	}
 }

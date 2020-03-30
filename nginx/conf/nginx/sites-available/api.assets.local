@@ -1,0 +1,68 @@
+server {
+	listen 80;
+	server_name api.assets.local;
+    include /etc/nginx/include.proxying;
+
+	location ~* ^\/mesh/(.*) {
+	    include /etc/nginx/include.cors;
+	    proxy_pass http://mesh;
+	}
+	location ~* ^\/assets/(.*) {
+	    include /etc/nginx/include.cors;
+	    proxy_pass http://assets;
+	}
+	location ~* ^\/clients/(.*) {
+	    include /etc/nginx/include.cors;
+	    proxy_pass http://clients;
+	}
+	location ~* ^\/(.*) {
+	    include /etc/nginx/include.cors;
+	    proxy_pass http://mesh;
+	}
+	
+	error_page 404 /custom_404.html;
+	error_page 500 502 503 504 /custom_50x.html;
+	location ~* ^\/custom(.*) {
+		root /var/www/fallback;
+	}
+	location = /custom_50x.html {
+		root /var/www/fallback;
+	}
+}
+server {
+	server_name api.assets.local;
+ 	listen 443 ssl http2;
+ 	listen [::]:443 ssl http2;
+	root /var/www/fallback;
+	underscores_in_headers on;
+	ssl_certificate /var/certbot/local/assets.crt;
+	ssl_certificate_key /var/certbot/local/assets.key;
+	include /etc/letsencrypt/options-ssl-nginx.conf;
+	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
+	keepalive_timeout   70;
+	index  index.html index.htm;
+    include /etc/nginx/include.proxying;
+    include /etc/nginx/include.cors;
+
+	location ~* ^\/mesh/(.*) {
+	    proxy_pass http://mesh;
+	}
+	location ~* ^\/assets/(.*) {
+    	proxy_pass http://assets;
+	}
+	location ~* ^\/clients/(.*) {
+    	proxy_pass http://clients;
+	}
+	location ~* ^\/(.*) {
+    	proxy_pass http://mesh;
+	}
+
+	error_page 404 /custom_404.html;
+	error_page 500 502 503 504 /custom_50x.html;
+	location ~* ^\/custom(.*) {
+		root /var/www/fallback;
+	}
+	location = /custom_50x.html {
+		root /var/www/fallback;
+	}
+}

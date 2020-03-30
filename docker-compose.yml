@@ -9,9 +9,6 @@ services:
         build:
             context: ./nginx
         container_name: "af2_nginx"
-        restart: unless-stopped
-        environment:
-            - spring_profiles_active=${spring_profiles_active}
         ports:
             - "80:80"
             - "443:443"
@@ -23,10 +20,10 @@ services:
         links:
             - assets
             - clients
+            - mesh
         #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
     image: certbot/certbot
-    restart: unless-stopped
     container_name: "af2_certbot"
     volumes:
       - ./volumes/certbot/conf:/etc/letsencrypt
@@ -34,7 +31,6 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   mysql:
       image: mysql:5.7
-      restart: unless-stopped
       container_name: "af2_mysql"
       volumes:
         - mysql_data:/var/lib/mysql
@@ -46,7 +42,6 @@ services:
   keycloak:
       image: quay.io/keycloak/keycloak:7.0.0
       container_name: "af2_keycloak"
-      restart: unless-stopped
       ports:
         - "8189:8080"
       environment:
@@ -66,7 +61,6 @@ services:
   mongodb:
         image: mongo:latest
         container_name: "af2_mongodb"
-        restart: unless-stopped
         environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
@@ -79,25 +73,23 @@ services:
         build:
             context: ../af-ms-assets
         container_name: "af2_assets"
-        restart: unless-stopped
         environment:
             - spring.profiles.active=${spring_profiles_active}
-            - JAVA_OPTS=-Xm2g -Xms2g -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+            - JAVA_OPTS=-Xm2g -Xms2g
         ports:
-            - "8000:8000"
+            - "8100:8100"
             - "8191:8080"
         links:
             - mongodb
   clients:
         build:
             context: ../af-ms-clients
-        restart: unless-stopped
         container_name: "af2_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
-            - JAVA_OPTS=-Xm2g -Xms2g -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+            - JAVA_OPTS=-Xm2g -Xms2g
         ports:
-            - "8002:8000"
+            - "8102:8102"
             - "8193:8080"
         links:
             - mongodb
@@ -105,13 +97,11 @@ services:
         build:
             context: ../af-ms-mesh
         container_name: "af2_mesh"
-        restart: unless-stopped
         environment:
             - spring.profiles.active=${spring_profiles_active}
-            - JAVA_OPTS=-Xm2g -Xms2g -agentlib:jdwp=transport=dt_socket,address=8000,server=y,suspend=n
+            - JAVA_OPTS=-Xm2g -Xms2g
         ports:
-            - "8004:8000"
+            - "8104:8104"
             - "8195:8080"
         links:
             - mongodb
-        
