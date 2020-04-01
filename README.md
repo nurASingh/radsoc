@@ -1,4 +1,4 @@
-# af-mf-appshell
+# fe-appshell
 
 ## Project setup
 
@@ -9,10 +9,10 @@ docker-compose build --pull --force-rm
 ```
 
 ```
-docker tag af-compose_assets mijoco/af-compose_assets
-docker tag af-compose_clients mijoco/af-compose_clients
-docker push mijoco/af-compose_assets
-docker push mijoco/af-compose_clients
+docker tag rs-docker_assets mijoco/rs-docker_assets
+docker tag rs-docker_clients mijoco/rs-docker_clients
+docker push mijoco/rs-docker_assets
+docker push mijoco/rs-docker_clients
 ```
 
 Run the containers

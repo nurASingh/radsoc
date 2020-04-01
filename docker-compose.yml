@@ -71,7 +71,7 @@ services:
         command: mongod --bind_ip_all --logpath=/dev/null
   assets:
         build:
-            context: ../af-ms-assets
+            context: ../ms-assets
         container_name: "af2_assets"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -83,7 +83,7 @@ services:
             - mongodb
   clients:
         build:
-            context: ../af-ms-clients
+            context: ../ms-clients
         container_name: "af2_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -95,7 +95,7 @@ services:
             - mongodb
   mesh:
         build:
-            context: ../af-ms-mesh
+            context: ../ms-mesh
         container_name: "af2_mesh"
         environment:
             - spring.profiles.active=${spring_profiles_active}
