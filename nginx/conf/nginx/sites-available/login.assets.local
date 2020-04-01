@@ -1,6 +1,6 @@
 server {
 	listen 80;
-	server_name *.login.assets.local;
+	server_name login.assets.local;
     include /etc/nginx/include.proxying;
 	location / {
 	    proxy_pass http://keycloak;
