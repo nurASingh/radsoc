@@ -8,7 +8,7 @@ services:
   nginx:
         build:
             context: ./nginx
-        container_name: "af2_nginx"
+        container_name: "rs_nginx"
         ports:
             - "80:80"
             - "443:443"
@@ -24,14 +24,14 @@ services:
         #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
     image: certbot/certbot
-    container_name: "af2_certbot"
+    container_name: "rs_certbot"
     volumes:
       - ./volumes/certbot/conf:/etc/letsencrypt
       - ./volumes/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   mysql:
       image: mysql:5.7
-      container_name: "af2_mysql"
+      container_name: "rs_mysql"
       volumes:
         - mysql_data:/var/lib/mysql
       environment:
@@ -41,7 +41,7 @@ services:
         MYSQL_PASSWORD: ${MYSQL_PASSWORD}
   keycloak:
       image: quay.io/keycloak/keycloak:7.0.0
-      container_name: "af2_keycloak"
+      container_name: "rs_keycloak"
       ports:
         - "8189:8080"
       environment:
@@ -60,7 +60,7 @@ services:
         - mysql
   mongodb:
         image: mongo:latest
-        container_name: "af2_mongodb"
+        container_name: "rs_mongodb"
         environment:
           - MONGO_DATA_DIR=/data/db
           - MONGO_LOG_DIR=/dev/null
@@ -72,7 +72,7 @@ services:
   assets:
         build:
             context: ../ms-assets
-        container_name: "af2_assets"
+        container_name: "rs_assets"
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g
@@ -84,7 +84,7 @@ services:
   clients:
         build:
             context: ../ms-clients
-        container_name: "af2_clients"
+        container_name: "rs_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g
@@ -96,7 +96,7 @@ services:
   mesh:
         build:
             context: ../ms-mesh
-        container_name: "af2_mesh"
+        container_name: "rs_mesh"
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g

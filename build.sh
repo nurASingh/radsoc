@@ -28,4 +28,17 @@ fi
 
 docker-compose build
 docker-compose up -d
+
+if [ -z "${SERVICE}" ]; then
+  echo -----------------------------------------------------------------------------------;
+  echo building all front ends;
+  echo -----------------------------------------------------------------------------------;
+  pushd ../fe-shellapp;
+  ./deploy.sh;
+  popd;
+  pushd ../fe-assets
+  ./deploy.sh;
+  popd;
+fi
+
 exit 0;
