@@ -1,6 +1,6 @@
 server {
 	listen 80;
-	server_name api.assets.local;
+	server_name api.radicle.local;
     include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
@@ -19,7 +19,7 @@ server {
 	    include /etc/nginx/include.cors;
 	    proxy_pass http://mesh;
 	}
-	
+
 	error_page 404 /custom_404.html;
 	error_page 500 502 503 504 /custom_50x.html;
 	location ~* ^\/custom(.*) {
@@ -30,7 +30,7 @@ server {
 	}
 }
 server {
-	server_name api.assets.local;
+	server_name api.radicle.local;
  	listen 443 ssl http2;
  	listen [::]:443 ssl http2;
 	root /var/www/fallback;
