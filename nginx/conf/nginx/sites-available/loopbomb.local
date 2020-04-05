@@ -1,36 +1,26 @@
 server {
 	listen 80;
-	server_name loopbomb.local;
+	server_name login.loopbomb.local;
+	include /etc/nginx/include.proxying;
 	root /var/www/loopbomb;
 	location / {
-		try_files $uri $uri/ /index.html;
-	}
+	  proxy_pass http://keycloak;
+  }
 }
 server {
+	listen 80;
 	server_name loopbomb.local;
- 	listen 443 ssl;
-	root /var/www/loopbomb;
-	underscores_in_headers on;
-	ssl_certificate /var/certbot/local/loopbomb.crt;
-	ssl_certificate_key /var/certbot/local/loopbomb.key;
-	include /etc/letsencrypt/options-ssl-nginx.conf;
-	ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem;
-
-	keepalive_timeout   70;
-	index  index.html index.htm;
-	proxy_set_header X-Forwarded-Host $host;
-	proxy_set_header X-Forwarded-Server $host;
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+	index index.htm index.html;
+	include /etc/nginx/include.proxying;
 	error_page 404 /custom_404.html;
-
-	# Cors headers needed to fetch manifest file!
+	root /var/www/loopbomb/;
 	location / {
 		try_files $uri $uri/ /index.html;
-		proxy_cache my_cache;
-		add_header 'Access-Control-Allow-Origin' "*" always;
-		add_header 'Access-Control-Allow-Credentials' 'true' always;
-		add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-		add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
+		include /etc/nginx/include.cors;
+	}
+	location /mijo-enterprises {
+	  try_files $uri $uri/ /index.html;
+		#return 301 https://res.cloudinary.com$request_uri;
 	}
 	location = /custom_404.html {
 		root /var/www/fallback;

@@ -12,7 +12,7 @@ server {
 	server_name *.assets.com;
  	listen 443 ssl;
 	root /var/www/assets;
-	underscores_in_headers on;
+	include /etc/nginx/include.proxying;
 	ssl_certificate /etc/letsencrypt/live/assets.com/fullchain.pem;
 	ssl_certificate_key /etc/letsencrypt/live/assets.com/privkey.pem;
 	include /etc/letsencrypt/options-ssl-nginx.conf;
@@ -20,10 +20,6 @@ server {
 
 	keepalive_timeout   70;
 	index  index.html index.htm;
-	proxy_set_header X-Forwarded-Host $host;
-	proxy_set_header X-Forwarded-Server $host;
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	error_page 404 /custom_404.html;
 
 	# Cors headers needed to fetch manifest file!
 	location / {
@@ -31,6 +27,7 @@ server {
 			proxy_cache my_cache;
       include /etc/nginx/include.cors;
 	}
+	error_page 404 /custom_404.html;
 	location = /custom_404.html {
 		root /var/www/fallback;
 	}

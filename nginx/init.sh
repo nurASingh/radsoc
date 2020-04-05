@@ -35,7 +35,6 @@ function __init_nginx() {
   ln -sf "/etc/nginx/sites-available/loopbomb.local" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/assets.local" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/api.radicle.local" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/login.assets.local" "/etc/nginx/sites-enabled"
 
   echo "Site enablement completed";
   touch /var/log/access.log
