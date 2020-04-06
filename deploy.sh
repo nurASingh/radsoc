@@ -61,7 +61,7 @@ printf "\n\nConnectiong to $SERVER.\n"
 ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd ~/hubgit/rs-docker
   git pull
-  echo "spring_profiles_active=$PROFILE" > .env
+	cp .env-prod .env
   docker-compose pull
   docker-compose up -d
 ";
