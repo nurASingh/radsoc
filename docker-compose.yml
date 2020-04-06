@@ -10,8 +10,8 @@ services:
             context: ./nginx
         container_name: "rs_nginx"
         ports:
-            - "80:80"
-            - "443:443"
+            - "8078:80"
+            - "4445:445"
         volumes:
             - ./volumes/log/nginx:/var/log/nginx
             - ./volumes/www:/var/www
@@ -42,8 +42,6 @@ services:
   keycloak:
       image: quay.io/keycloak/keycloak:7.0.0
       container_name: "rs_keycloak"
-      ports:
-        - "8189:8080"
       environment:
         DB_VENDOR: ${DB_VENDOR}
         DB_ADDR: ${DB_ADDR}
@@ -55,7 +53,7 @@ services:
         # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
         JDBC_PARAMS: "useSSL=false&connectTimeout=30000"
       ports:
-        - 8080:8080
+        - 8040:8080
       depends_on:
         - mysql
   mongodb:
@@ -67,7 +65,7 @@ services:
         volumes:
           - ./volumes/data/db:/data/db
         ports:
-            - 27017:27017
+            - 27019:27017
         command: mongod --bind_ip_all --logpath=/dev/null
   assets:
         build:
@@ -78,7 +76,7 @@ services:
             - JAVA_OPTS=-Xm2g -Xms2g
         ports:
             - "8100:8100"
-            - "8191:8080"
+            - "8042:8080"
         links:
             - mongodb
   clients:
@@ -90,7 +88,7 @@ services:
             - JAVA_OPTS=-Xm2g -Xms2g
         ports:
             - "8102:8102"
-            - "8193:8080"
+            - "8044:8080"
         links:
             - mongodb
   mesh:
@@ -102,6 +100,6 @@ services:
             - JAVA_OPTS=-Xm2g -Xms2g
         ports:
             - "8104:8104"
-            - "8195:8080"
+            - "8046:8080"
         links:
             - mongodb

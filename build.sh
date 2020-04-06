@@ -36,9 +36,6 @@ if [ -z "${SERVICE}" ]; then
   pushd ../fe-shellapp;
   ./deploy.sh;
   popd;
-  pushd ../fe-loopshell;
-  ./deploy.sh;
-  popd;
   pushd ../fe-assets
   ./deploy.sh;
   popd;
