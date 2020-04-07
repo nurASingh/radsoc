@@ -8,6 +8,7 @@ services:
   nginx:
         build:
             context: ./nginx
+        image: mijoco/radsoc_nginx
         container_name: "rs_nginx"
         ports:
             - "8078:80"
@@ -70,6 +71,7 @@ services:
   assets:
         build:
             context: ../ms-assets
+        image: mijoco/radsoc_assets
         container_name: "rs_assets"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -82,6 +84,7 @@ services:
   clients:
         build:
             context: ../ms-clients
+        image: mijoco/radsoc_clients
         container_name: "rs_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -94,6 +97,7 @@ services:
   mesh:
         build:
             context: ../ms-mesh
+        image: mijoco/radsoc_mesh
         container_name: "rs_mesh"
         environment:
             - spring.profiles.active=${spring_profiles_active}

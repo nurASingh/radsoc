@@ -6,7 +6,7 @@ volumes:
 
 services:
   nginx:
-        image: mijoco/rs-docker_nginx:latest
+        image: mijoco/radsoc_nginx:latest
         container_name: "rs_nginx"
         ports:
             - "8078:80"
@@ -67,7 +67,7 @@ services:
             - 27019:27017
         command: mongod --bind_ip_all --logpath=/dev/null
   assets:
-        image: mijoco/rs-docker_assets:latest
+        image: mijoco/radsoc_assets:latest
         container_name: "rs_assets"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -78,7 +78,7 @@ services:
         links:
             - mongodb
   clients:
-        image: mijoco/rs-docker_clients:latest
+        image: mijoco/radsoc_clients:latest
         container_name: "rs_clients"
         environment:
             - spring.profiles.active=${spring_profiles_active}
@@ -89,7 +89,7 @@ services:
         links:
             - mongodb
   mesh:
-        image: mijoco/rs-docker_mesh:latest
+        image: mijoco/radsoc_mesh:latest
         container_name: "rs_mesh"
         environment:
             - spring.profiles.active=${spring_profiles_active}
