@@ -1,0 +1,101 @@
+version: '3'
+
+volumes:
+  mysql_data:
+      driver: local
+
+services:
+  nginx:
+        image: mijoco/rs-docker_nginx:latest
+        container_name: "rs_nginx"
+        ports:
+            - "8078:80"
+            - "4445:445"
+        volumes:
+            - ./volumes/log/nginx:/var/log/nginx
+            - ./volumes/www:/var/www
+            - ./volumes/certbot/conf:/etc/letsencrypt
+            - ./volumes/certbot:/var/certbot
+        links:
+            - assets
+            - clients
+            - mesh
+        #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
+  certbot:
+    image: certbot/certbot
+    container_name: "rs_certbot"
+    volumes:
+      - ./volumes/certbot/conf:/etc/letsencrypt
+      - ./volumes/certbot/www:/var/www/certbot
+    entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
+  mysql:
+      image: mysql:5.7
+      container_name: "rs_mysql"
+      volumes:
+        - mysql_data:/var/lib/mysql
+      environment:
+        MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+        MYSQL_DATABASE: ${MYSQL_DATABASE}
+        MYSQL_USER: ${MYSQL_USER}
+        MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+  keycloak:
+      image: quay.io/keycloak/keycloak:7.0.0
+      container_name: "rs_keycloak"
+      environment:
+        DB_VENDOR: ${DB_VENDOR}
+        DB_ADDR: ${DB_ADDR}
+        DB_DATABASE: ${DB_DATABASE}
+        DB_USER: ${DB_USER}
+        DB_PASSWORD: ${DB_PASSWORD}
+        KEYCLOAK_USER: ${KEYCLOAK_USER}
+        KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
+        # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
+        JDBC_PARAMS: "useSSL=false&connectTimeout=30000"
+      ports:
+        - 8040:8080
+      depends_on:
+        - mysql
+  mongodb:
+        image: mongo:latest
+        container_name: "rs_mongodb"
+        environment:
+          - MONGO_DATA_DIR=/data/db
+          - MONGO_LOG_DIR=/dev/null
+        volumes:
+          - ./volumes/data/db:/data/db
+        ports:
+            - 27019:27017
+        command: mongod --bind_ip_all --logpath=/dev/null
+  assets:
+        image: mijoco/rs-docker_assets:latest
+        container_name: "rs_assets"
+        environment:
+            - spring.profiles.active=${spring_profiles_active}
+            - JAVA_OPTS=-Xm2g -Xms2g
+        ports:
+            - "8100:8100"
+            - "8042:8080"
+        links:
+            - mongodb
+  clients:
+        image: mijoco/rs-docker_clients:latest
+        container_name: "rs_clients"
+        environment:
+            - spring.profiles.active=${spring_profiles_active}
+            - JAVA_OPTS=-Xm2g -Xms2g
+        ports:
+            - "8102:8102"
+            - "8044:8080"
+        links:
+            - mongodb
+  mesh:
+        image: mijoco/rs-docker_mesh:latest
+        container_name: "rs_mesh"
+        environment:
+            - spring.profiles.active=${spring_profiles_active}
+            - JAVA_OPTS=-Xm2g -Xms2g
+        ports:
+            - "8104:8104"
+            - "8046:8080"
+        links:
+            - mongodb
