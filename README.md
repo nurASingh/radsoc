@@ -49,7 +49,8 @@ Copy them into a volume nginx can access
 
 ```
 cd $PROJECT_ROOT/certs
-cp assets.key assets.crt $PROJECT_ROOT/volumes/certbot/local/.
+
+cp certs/assets.key certs/assets.crt ./volumes/certbot/local/.
 ```
 
 in the vhost file e.g. /etc/nginx/sites-enabled/assets.local

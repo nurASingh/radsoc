@@ -11,8 +11,8 @@ services:
         image: mijoco/radsoc_nginx
         container_name: "rs_nginx"
         ports:
-            - "8078:80"
-            - "4445:445"
+            - "80:80"
+            - "443:445"
         volumes:
             - ./volumes/log/nginx:/var/log/nginx
             - ./volumes/www:/var/www

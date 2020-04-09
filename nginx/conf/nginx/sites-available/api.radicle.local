@@ -4,19 +4,19 @@ server {
     include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
-	    include /etc/nginx/include.cors;
+	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://mesh;
 	}
 	location ~* ^\/assets/(.*) {
-	    include /etc/nginx/include.cors;
+	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://assets;
 	}
 	location ~* ^\/clients/(.*) {
-	    include /etc/nginx/include.cors;
+	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://clients;
 	}
 	location ~* ^\/(.*) {
-	    include /etc/nginx/include.cors;
+	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://mesh;
 	}
 
@@ -41,7 +41,7 @@ server {
 	keepalive_timeout   70;
 	index  index.html index.htm;
   include /etc/nginx/include.proxying;
-  include /etc/nginx/include.cors;
+  include /etc/nginx/include-no-acao.cors;
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
