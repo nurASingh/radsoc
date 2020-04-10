@@ -10,9 +10,9 @@ docker-compose build --pull --force-rm
 
 ```
 docker tag radsoc_assets mijoco/radsoc_assets
-docker tag radsoc_clients mijoco/radsoc_clients
+docker tag radsoc_lsat mijoco/radsoc_lsat
 docker push mijoco/radsoc_assets
-docker push mijoco/radsoc_clients
+docker push mijoco/radsoc_lsat
 ```
 
 Run the containers

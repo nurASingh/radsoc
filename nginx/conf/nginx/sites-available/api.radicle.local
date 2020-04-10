@@ -11,9 +11,9 @@ server {
 	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://assets;
 	}
-	location ~* ^\/clients/(.*) {
+	location ~* ^\/lsat/(.*) {
 	    include /etc/nginx/include-no-acao.cors;
-	    proxy_pass http://clients;
+	    proxy_pass http://lsat;
 	}
 	location ~* ^\/(.*) {
 	    include /etc/nginx/include-no-acao.cors;
@@ -49,8 +49,8 @@ server {
 	location ~* ^\/assets/(.*) {
     	proxy_pass http://assets;
 	}
-	location ~* ^\/clients/(.*) {
-    	proxy_pass http://clients;
+	location ~* ^\/lsat/(.*) {
+    	proxy_pass http://lsat;
 	}
 	location ~* ^\/(.*) {
     	proxy_pass http://mesh;

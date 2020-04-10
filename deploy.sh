@@ -29,12 +29,12 @@ printf "\n- Tagging ------------------------------------------------------------
 #$DOCKER_CMD commit radsoc_assets $DOCKER_ID_USER/radsoc_assets
 
 $DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
-$DOCKER_CMD tag mijoco/radsoc_clients mijoco/radsoc_clients
+$DOCKER_CMD tag mijoco/radsoc_lsat mijoco/radsoc_lsat
 $DOCKER_CMD tag mijoco/radsoc_mesh  mijoco/radsoc_mesh
 $DOCKER_CMD tag mijoco/radsoc_nginx mijoco/radsoc_nginx
 
 $DOCKER_CMD push mijoco/radsoc_assets:latest
-$DOCKER_CMD push mijoco/radsoc_clients:latest
+$DOCKER_CMD push mijoco/radsoc_lsat:latest
 $DOCKER_CMD push mijoco/radsoc_mesh:latest
 $DOCKER_CMD push mijoco/radsoc_nginx:latest
 

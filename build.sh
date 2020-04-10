@@ -13,14 +13,14 @@ if [ -z "${SERVICE}" ]; then
   echo building all services;
   echo -----------------------------------------------------------------------------------;
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
-  mvn -f ../ms-clients/pom.xml -Dmaven.test.skip=true clean install
+  mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
 fi
 if [ "$SERVICE" == "assets" ]; then
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
 fi
-if [ "$SERVICE" == "clients" ]; then
-  mvn -f ../ms-clients/pom.xml -Dmaven.test.skip=true clean install
+if [ "$SERVICE" == "lsat" ]; then
+  mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
 fi
 if [ "$SERVICE" == "mesh" ]; then
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install

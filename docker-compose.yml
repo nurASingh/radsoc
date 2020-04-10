@@ -20,7 +20,7 @@ services:
             - ./volumes/certbot:/var/certbot
         links:
             - assets
-            - clients
+            - lsat
             - mesh
         #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
   certbot:
@@ -81,11 +81,11 @@ services:
             - "8042:8080"
         links:
             - mongodb
-  clients:
+  lsat:
         build:
-            context: ../ms-clients
-        image: mijoco/radsoc_clients
-        container_name: "rs_clients"
+            context: ../ms-lsat
+        image: mijoco/radsoc_lsat
+        container_name: "rs_lsat"
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g
