@@ -12,7 +12,7 @@ server {
 	    proxy_pass http://assets;
 	}
 	location ~* ^\/lsat/(.*) {
-	    include /etc/nginx/include-no-acao.cors;
+	    include /etc/nginx/include.cors2;
 	    proxy_pass http://lsat;
 	}
 	location ~* ^\/(.*) {

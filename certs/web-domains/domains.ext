@@ -4,10 +4,7 @@ keyUsage = digitalSignature, nonRepudiation, keyEncipherment, dataEncipherment
 subjectAltName = @alt_names
 [alt_names]
 DNS.1 = localhost
-DNS.2 = c1.assets.local
-DNS.3 = apex.assets.local
-DNS.4 = ge.assets.local
-DNS.5 = tata.assets.local
-DNS.6 = rolls.assets.local
-DNS.7 = assets.local
-DNS.8 = login.assets.local
+DNS.2 = c1.radicle.local
+DNS.3 = lnd.radicle.local
+DNS.4 = radicle.local
+DNS.5 = login.radicle.local
