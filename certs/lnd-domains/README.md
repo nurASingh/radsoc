@@ -9,6 +9,7 @@ See: https://medium.com/@pubudu538/how-to-create-a-self-signed-ssl-certificate-f
 https://docs.zaphq.io/docs-desktop-lnd-configure
 
 No need to do this
+
 ```
 lnd --tlsextradomain=lnd.radicle.local --tlsextradomain=docker.for.mac.localhost
 rm ~/Library/Application\ Support/Lnd/tls.*
@@ -18,22 +19,14 @@ cp $HOME/Library/Application\ Support/Lnd/tls.cert $HOME/hubgit/radicle-solution
 cp data/chain/bitcoin/testnet/admin.macaroon /Users/mikey/hubgit/radicle-solutions/ms-lsat/src/main/resources/static/alice.admin.macaroon
 ```
 
+Not necessary to do the following as lnd doesn't recognise the certificate but included here for completeness...
 
-rm tls.cert / tls.key
-
-  501 34310 28981     4006   0  31  0  4495612  16680 -      S                   0 ttys002    0:00.06 lnd --tlsextradomain=docker.for.mac.localhost --tlsextradomain=lnd.radicle.local --rpclisten=0.0.0.0:10001 --listen=localhost:10011 --restlisten=0.0.0.0:8001
-
-cp
-
-
-
+```
 openssl x509 -text -noout -in $HOME/Library/Application\ Support/Lnd/tls.cert
-
 openssl ecparam -genkey -name prime256v1 -out radicle.key
 openssl req -new -sha256 -key radicle.key -out radicle.csr  -config localhost.conf
 openssl req -x509 -sha256 -days 7200 -key radicle.key  -in radicle.csr  -out radicle.cert
-
 cp radicle.key $HOME/Library/Application\ Support/Lnd/tls.key
 cp radicle.cert $HOME/Library/Application\ Support/Lnd/tls.cert
-
 cp radicle.cert $HOME/hubgit/radicle-solutions/ms-lsat/src/main/resources/static/radicle_local.cert
+```
