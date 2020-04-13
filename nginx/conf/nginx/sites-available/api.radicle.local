@@ -1,23 +1,27 @@
 server {
 	listen 80;
 	server_name api.radicle.local;
-    include /etc/nginx/include.proxying;
+  include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
-	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://mesh;
+			#include /etc/nginx/include-no-acao.cors;
 	}
 	location ~* ^\/assets/(.*) {
-	    include /etc/nginx/include-no-acao.cors;
 	    proxy_pass http://assets;
+			#include /etc/nginx/include-no-acao.cors;
+	}
+	location ~* ^\/lsat/ws1/(.*) {
+	    proxy_pass http://lsat;
+			#include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/lsat/(.*) {
-	    include /etc/nginx/include.cors2;
 	    proxy_pass http://lsat;
+			#include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/(.*) {
-	    include /etc/nginx/include-no-acao.cors;
-	    proxy_pass http://mesh;
+	    proxy_pass http://lsat;
+			#include /etc/nginx/include-no-acao.cors;
 	}
 
 	error_page 404 /custom_404.html;
