@@ -12,7 +12,7 @@ echo ---------------------------------------------------------------------------
 echo building and upping;
 echo -----------------------------------------------------------------------------------;
 
-#./build.sh
+./build.sh
 
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 printf "Running script: $0 \n";
@@ -20,9 +20,9 @@ printf "Against destination server: $SERVER \n";
 printf "Active profile: $PROFILE \n";
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 
-DOCKER_ID_USER='mijoco'
-DOCKER_COMPOSE_CMD='docker-compose'
-DOCKER_CMD='docker'
+export DOCKER_ID_USER='mijoco'
+export DOCKER_COMPOSE_CMD='docker-compose'
+export DOCKER_CMD='docker'
 
 printf "\n- Tagging ---------------------------------------------------------------------------------------------------\n";
 
