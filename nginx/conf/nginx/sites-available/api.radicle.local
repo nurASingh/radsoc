@@ -5,23 +5,23 @@ server {
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
-			#include /etc/nginx/include-no-acao.cors;
+			include /etc/nginx/include.cors;
 	}
 	location ~* ^\/assets/(.*) {
 	    proxy_pass http://assets;
-			#include /etc/nginx/include-no-acao.cors;
+			include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/lsat/ws1/(.*) {
-	    proxy_pass http://lsat;
-			#include /etc/nginx/include.cors2;
+	  proxy_pass http://lsat;
+    include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/lsat/(.*) {
 	    proxy_pass http://lsat;
-			#include /etc/nginx/include.cors2;
+			include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/(.*) {
 	    proxy_pass http://lsat;
-			#include /etc/nginx/include-no-acao.cors;
+			include /etc/nginx/include.cors2;
 	}
 
 	error_page 404 /custom_404.html;
@@ -45,7 +45,7 @@ server {
 	keepalive_timeout   70;
 	index  index.html index.htm;
   include /etc/nginx/include.proxying;
-  include /etc/nginx/include-no-acao.cors;
+  include /etc/nginx/include.cors;
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;

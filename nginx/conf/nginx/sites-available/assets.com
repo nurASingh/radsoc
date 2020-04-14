@@ -25,7 +25,6 @@ server {
 	location / {
 	   	try_files $uri $uri/ /index.html;
 			proxy_cache my_cache;
-      include /etc/nginx/include.cors;
 	}
 	error_page 404 /custom_404.html;
 	location = /custom_404.html {

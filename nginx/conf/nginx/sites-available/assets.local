@@ -2,7 +2,6 @@ server {
 	listen 80;
 	server_name physical.assets.local;
 	root /var/www/assets;
-	include /etc/nginx/include.cors;
 	location / {
 		try_files $uri $uri/ /index.html;
 	}
@@ -10,7 +9,6 @@ server {
 server {
 	listen 80;
 	server_name digital.assets.local;
-	include /etc/nginx/include.cors;
 	root /var/www/assets;
 	location / {
 		try_files $uri $uri/ /index.html;
