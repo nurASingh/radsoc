@@ -57,8 +57,6 @@ ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   docker-compose -f docker-compose-images.yml up -d
 ";
 
-popd > /dev/null
-
 printf "Finished....\n"
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 
