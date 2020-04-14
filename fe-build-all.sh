@@ -14,11 +14,11 @@ if [ -z "${SERVICE}" ]; then
   echo building all front ends;
   echo -----------------------------------------------------------------------------------;
   pushd ../fe-shellapp;
-  nvm use v11.14.0
+  # nvm use v11.14.0
   ./deploy.sh;
   popd;
   pushd ../fe-assets
-  nvm use v11.14.0
+  # nvm use v11.14.0
   ./deploy.sh;
   popd;
 fi
