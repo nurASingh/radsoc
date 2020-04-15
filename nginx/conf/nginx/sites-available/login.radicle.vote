@@ -22,9 +22,9 @@ server {
 	keepalive_timeout   70;
 	index  index.html index.htm;
 	include /etc/nginx/include.proxying;
+	include /etc/nginx/include.cors;
 
 	location ~* ^\/(.*) {
 	    proxy_pass http://keycloak;
-			include /etc/nginx/include.cors2;
 	}
 }
