@@ -12,7 +12,7 @@ echo ---------------------------------------------------------------------------
 echo building and upping;
 echo -----------------------------------------------------------------------------------;
 
-./build.sh
+#./build.sh
 
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 printf "Running script: $0 \n";
@@ -47,6 +47,8 @@ git push
 
 #exit 0;
 
+rsync -aP -e "ssh  -p 7019" ../fe-shellapp/dist/* bob@$SERVER:/var/www/radicle402
+exit 0;
 printf "\n\nConnectiong to $SERVER.\n"
 ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd ~/hubgit/radsoc
