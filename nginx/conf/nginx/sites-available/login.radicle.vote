@@ -3,9 +3,9 @@ server {
      	listen   [::]:80 default ipv6only=on; ## listen for ipv6
 			server_name login.radicle.vote;
 			location ^~ /.well-known {
-      	allow all;
-      	root  /data/letsencrypt/;
-    	}
+		      allow all;
+		      root  /data/letsencrypt/;
+		    }
 			location / {
       	return 301 https://$host$request_uri;
 			}

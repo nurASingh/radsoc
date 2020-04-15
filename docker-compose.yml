@@ -52,6 +52,7 @@ services:
         KEYCLOAK_USER: ${KEYCLOAK_USER}
         KEYCLOAK_PASSWORD: ${KEYCLOAK_PASSWORD}
         PROXY_ADDRESS_FORWARDING: ${PROXY_ADDRESS_FORWARDING}
+        KEYCLOAK_FRONTEND_URL: ${KEYCLOAK_FRONTEND_URL}
         # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
         JDBC_PARAMS: "useSSL=false&connectTimeout=30000"
       ports:
