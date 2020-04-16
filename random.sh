@@ -45,7 +45,7 @@ git add .
 git commit -m "commit from deployment"
 git push
 
-#exit 0;
+exit 0;
 
 rsync -aP -e "ssh  -p 7019" ./volumes/www/assets/* bob@$SERVER:/var/www/radicle402
 
