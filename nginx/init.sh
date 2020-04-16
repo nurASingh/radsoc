@@ -32,9 +32,9 @@ function __init_nginx() {
   # Enable all sites
   echo "Enabling sites $profile";
   #ln -sf "/etc/nginx/sites-available/assets.com" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/radicle.vote" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/api.radicle.vote" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/login.radicle.vote" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.radicle.local" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/api.radicle.local" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/login.radicle.local" "/etc/nginx/sites-enabled"
 
   echo "Site enablement completed";
   touch /var/log/access.log

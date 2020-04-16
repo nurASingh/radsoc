@@ -1,6 +1,6 @@
 server {
 	listen 80;
-  #listen [::]:80 default ipv6only=on;
+	listen [::]:80;
   server_name radicle.vote www.radicle.vote;
 	location ^~ /.well-known {
         allow all;

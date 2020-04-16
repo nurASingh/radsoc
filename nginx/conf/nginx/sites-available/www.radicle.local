@@ -1,0 +1,18 @@
+server {
+	listen 80;
+	listen [::]:80;
+	server_name physical.radicle.local;
+	root /var/www/assets;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name digital.radicle.local;
+	root /var/www/assets;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}

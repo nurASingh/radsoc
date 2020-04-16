@@ -1,0 +1,9 @@
+server {
+	listen 80;
+	listen [::]:80;
+	server_name login.radicle.local;
+  include /etc/nginx/include.proxying;
+	location / {
+	    proxy_pass http://keycloak;
+  }
+}

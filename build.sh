@@ -8,10 +8,10 @@ printf "Running argument: $1 \n";
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 
 pwd
+echo \n\n\n-----------------------------------------------------------------------------------;
+echo building services;
+echo -----------------------------------------------------------------------------------;
 if [ -z "${SERVICE}" ]; then
-  echo -----------------------------------------------------------------------------------;
-  echo building all services;
-  echo -----------------------------------------------------------------------------------;
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
   mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
@@ -26,18 +26,21 @@ if [ "$SERVICE" == "mesh" ]; then
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
 fi
 
+echo \n\n\n-----------------------------------------------------------------------------------;
+echo building images;
+echo -----------------------------------------------------------------------------------;
 docker-compose build
 docker-compose up -d
 
 if [ -z "${SERVICE}" ]; then
   echo -----------------------------------------------------------------------------------;
-  echo building all front ends;
+  echo building micro front ends;
   echo -----------------------------------------------------------------------------------;
   pushd ../fe-shellapp;
-  ./deploy.sh;
+    ./deploy.sh;
   popd;
   pushd ../fe-assets
-  ./deploy.sh;
+    ./deploy.sh;
   popd;
 fi
 

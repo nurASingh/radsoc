@@ -15,7 +15,7 @@ services:
             - "${HTTPS_PORT}:443"
         volumes:
             - ./volumes/log/nginx:/var/log/nginx
-            - ./volumes/www:/var/www
+            - ./volumes/www/development:/var/www
             - ./volumes/certbot/conf:/etc/letsencrypt
             - ./volumes/certbot:/var/certbot
         links:

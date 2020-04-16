@@ -49,7 +49,7 @@ vi $PROJECT_ROOT/certs/domains.ext
 create certificates - see domains.ext
 
 ```
-openssl req -new -nodes -newkey rsa:2048 -keyout assets.key -out assets.csr -subj "/C=UK/ST=Sussex/L=Brighton/O=Radicle-Certs/CN=assets.local"
+openssl req -new -nodes -newkey rsa:2048 -keyout assets.key -out assets.csr -subj "/C=UK/ST=Sussex/L=Brighton/O=Radicle-Certs/CN=radicle.local"
 openssl x509 -req -sha256 -days 1024 -in assets.csr -CA RadicleCA.pem -CAkey RadicleCA.key -CAcreateserial -extfile domains.ext -out assets.crt
 ```
 
@@ -61,11 +61,11 @@ cd $PROJECT_ROOT/certs
 cp certs/assets.key certs/assets.crt ./volumes/certbot/local/.
 ```
 
-in the vhost file e.g. /etc/nginx/sites-enabled/assets.local
+in the vhost file e.g. /etc/nginx/sites-enabled/radicle.local
 
 ```
 server {
-	server_name *-login.assets.local;
+	server_name login.radicle.local;
   .
   .
 	ssl_certificate /var/certbot/local/assets.crt;
