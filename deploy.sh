@@ -7,6 +7,9 @@ export PROFILE=staging
 if [ "$SERVER" == "hume.brightblock.org" ]; then
 	PROFILE=production
 fi
+export DOCKER_ID_USER='mijoco'
+export DOCKER_COMPOSE_CMD='docker-compose'
+export DOCKER_CMD='docker'
 
 echo -----------------------------------------------------------------------------------;
 echo building all services;
@@ -18,6 +21,7 @@ mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
 echo \n\n\n-----------------------------------------------------------------------------------;
 echo building images;
 echo -----------------------------------------------------------------------------------;
+cp .env.production .env
 docker-compose build
 
 echo \n\n\n-----------------------------------------------------------------------------------;
@@ -43,10 +47,6 @@ rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/radicle402
 echo \n\n\n-----------------------------------------------------------------------------------;
 echo pushing images;
 echo -----------------------------------------------------------------------------------;
-
-export DOCKER_ID_USER='mijoco'
-export DOCKER_COMPOSE_CMD='docker-compose'
-export DOCKER_CMD='docker'
 
 #$DOCKER_CMD commit radsoc_assets $DOCKER_ID_USER/radsoc_assets
 
