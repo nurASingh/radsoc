@@ -26,7 +26,7 @@ docker-compose up -d
 ## Curl Testing
 
 ```
-$ curl -d '{"assetHash":"title of ticket", "contentId":"product.id", "purchaseDate":"2020-03-01", "amount":"10.50", "addressTo":"unknown", "addressFrom":"unknown"}' -H "Content-Type: application/json" -L --verbose -X POST http://localhost:8042/assets/buy-now
+$ curl -d '{"assetHash":"title of ticket", "productId":"product.id", "purchaseDate":"2020-03-01", "amount":"10.50", "addressTo":"unknown", "addressFrom":"unknown"}' -H "Content-Type: application/json" -L --verbose -X POST http://localhost:8042/assets/buy-now
 ```
 
 ## SSL localhost

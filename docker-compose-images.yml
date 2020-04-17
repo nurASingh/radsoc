@@ -66,7 +66,7 @@ services:
         volumes:
           - ./volumes/data/db:/data/db
         ports:
-            - 27019:27017
+            - 27019:27019
         command: mongod --bind_ip_all --logpath=/dev/null
   assets:
         image: mijoco/radsoc_assets:latest
