@@ -14,5 +14,8 @@ popd;
 pushd ../fe-assets
 ./deploy.sh;
 popd;
+pushd ../fe-lsat
+./deploy.sh;
+popd;
 
 exit 0;

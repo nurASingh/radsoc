@@ -11,7 +11,7 @@ mkdir -p $PATH_DEPLOY/../fallback
 
 if [ -z "${SERVICE}" ]; then
 	pushd ../fe-shellapp;
-  echo --- fe-assets:build-prod --------------------------------------------------------------------------------;
+  echo --- fe-shellapp:build-prod --------------------------------------------------------------------------------;
 	npm run build-prod
 	popd;
 
@@ -19,6 +19,13 @@ if [ -z "${SERVICE}" ]; then
   echo --- fe-assets:build-prod --------------------------------------------------------------------------------;
 	npm run build-prod
 	popd;
+
+
+	pushd ../fe-lsat
+	echo --- fe-lsat:build-prod --------------------------------------------------------------------------------;
+	npm run build-prod
+	popd;
+
 fi
 if [ "$SERVICE" == "assets" ]; then
 	pushd ../fe-assets
@@ -32,11 +39,18 @@ if [ "$SERVICE" == "shell" ]; then
 	npm run build-prod
 	popd;
 fi
+if [ "$SERVICE" == "lsat" ]; then
+	pushd ../fe-lsat;
+  echo --- fe-lsat:build-prod --------------------------------------------------------------------------------;
+	npm run build-prod
+	popd;
+fi
 
 echo --- radsoc:copying to [ $PATH_DEPLOY ] --------------------------------------------------------------------------------;
 cp ../fe-shellapp/dist/custom* $PATH_DEPLOY/../fallback
 cp -r ../fe-shellapp/dist/* $PATH_DEPLOY/.
 cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
+cp ../fe-lsat/dist/lsat-entry.js $PATH_DEPLOY/.
 
 rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/radicle402
 

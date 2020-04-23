@@ -41,6 +41,10 @@ pushd ../fe-assets
 npm run build-prod
 popd;
 cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
+pushd ../fe-lsat
+npm run build-prod
+popd;
+cp ../fe-lsat/dist/lsat-entry.js $PATH_DEPLOY/.
 
 rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/radicle402
 
