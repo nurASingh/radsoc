@@ -4,18 +4,39 @@ printf "\n----------------------------------------------------------------------
 printf "Running script: $0 \n";
 printf "\n-----------------------------------------------------------------------------------------------------\n";
 
+export SERVICE=$1
+
 pwd
 echo -----------------------------------------------------------------------------------;
 echo building all front ends;
 echo -----------------------------------------------------------------------------------;
-pushd ../fe-shellapp;
-./deploy.sh;
-popd;
-pushd ../fe-assets
-./deploy.sh;
-popd;
-pushd ../fe-lsat
-./deploy.sh;
-popd;
+
+if [ -z "${SERVICE}" ]; then
+  pushd ../fe-shellapp;
+  ./deploy.sh;
+  popd;
+  pushd ../fe-assets
+  ./deploy.sh;
+  popd;
+  pushd ../fe-lsat
+  ./deploy.sh;
+  popd;
+fi
+
+if [ "$SERVICE" == "assets" ]; then
+  pushd ../fe-assets
+  ./deploy.sh;
+  popd;
+fi
+if [ "$SERVICE" == "lsat" ]; then
+  pushd ../fe-lsat
+  ./deploy.sh;
+  popd;
+fi
+if [ "$SERVICE" == "shellapp" ]; then
+  pushd ../fe-shellapp;
+  ./deploy.sh;
+  popd;
+fi
 
 exit 0;
