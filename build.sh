@@ -43,6 +43,9 @@ if [ -z "${SERVICE}" ]; then
   pushd ../fe-assets
     ./deploy.sh;
   popd;
+  pushd ../fe-articles
+    ./deploy.sh;
+  popd;
   pushd ../fe-lsat
     ./deploy.sh;
   popd;

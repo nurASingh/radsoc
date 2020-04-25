@@ -21,8 +21,16 @@ if [ -z "${SERVICE}" ]; then
   pushd ../fe-lsat
   ./deploy.sh;
   popd;
+  pushd ../fe-articles
+  ./deploy.sh;
+  popd;
 fi
 
+if [ "$SERVICE" == "articles" ]; then
+  pushd ../fe-articles
+  ./deploy.sh;
+  popd;
+fi
 if [ "$SERVICE" == "assets" ]; then
   pushd ../fe-assets
   ./deploy.sh;
