@@ -25,7 +25,7 @@ if [ "$SERVICE" == "all" ]; then
 fi
 if [ "$SERVICE" == "assets" ]; then
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
-	docker-compose build
+	docker-compose build assets
 	$DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
 	$DOCKER_CMD push mijoco/radsoc_assets:latest
 fi

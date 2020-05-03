@@ -30,7 +30,7 @@ echo \n\n\n---------------------------------------------------------------------
 echo building images;
 echo -----------------------------------------------------------------------------------;
 cp .env.local .env
-docker-compose build
+docker-compose build $SERVICE
 docker-compose up -d
 
 if [ -z "${SERVICE}" ]; then

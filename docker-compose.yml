@@ -93,6 +93,8 @@ services:
         environment:
             - spring.profiles.active=${spring_profiles_active}
             - JAVA_OPTS=-Xm2g -Xms2g
+            - BTC_ACCESS_KEY_ID=${BTC_ACCESS_KEY_ID}
+            - WPHRASE=${WPHRASE}
         ports:
             - "8102:8102"
             - "8044:8080"

@@ -33,6 +33,7 @@ function __init_nginx() {
   echo "Enabling sites $profile";
   #ln -sf "/etc/nginx/sites-available/assets.com" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/www.radicle.local" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.loopbomb.local" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/api.radicle.local" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/login.radicle.local" "/etc/nginx/sites-enabled"
 
