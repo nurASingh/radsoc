@@ -53,7 +53,7 @@ npm run build-prod
 popd;
 cp ../fe-articles/dist/articles-entry.js $PATH_DEPLOY/.
 
-rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/radicle402
+rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/risidio402
 
 echo \n\n\n-----------------------------------------------------------------------------------;
 echo pushing images;

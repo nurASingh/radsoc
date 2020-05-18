@@ -1,17 +1,17 @@
 server {
 			listen 80;
 			listen [::]:80;
-			server_name login.radicle.vote;
+			server_name login.risidio.com;
 			location ^~ /.well-known {
 		      allow all;
 		      root  /data/letsencrypt/;
-		    }
+		  }
 			location / {
       	return 301 https://$host$request_uri;
 			}
 }
 server {
-	server_name login.radicle.vote;
+	server_name login.risidio.com;
  	listen 443 ssl http2;
  	listen [::]:443 ssl http2;
 	root /var/www/fallback;

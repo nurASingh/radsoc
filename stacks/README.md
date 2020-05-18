@@ -1,4 +1,4 @@
-# radicle stacks
+# risidio stacks
 
 ## Stacks Node Test Net
 

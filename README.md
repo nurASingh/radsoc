@@ -1,4 +1,4 @@
-# fe-appshell
+paymentId# fe-appshell
 
 ## Project setup
 
@@ -26,7 +26,7 @@ docker-compose up -d
 ## Curl Testing
 
 ```
-$ curl -d '{"assetHash":"title of ticket", "productId":"product.id", "purchaseDate":"2020-03-01", "amount":"10.50", "addressTo":"unknown", "addressFrom":"unknown"}' -H "Content-Type: application/json" -L --verbose -X POST http://localhost:8042/assets/buy-now
+$ curl -d '{"assetHash":"title of ticket", "paymentId":"product.id", "purchaseDate":"2020-03-01", "amount":"10.50", "addressTo":"unknown", "addressFrom":"unknown"}' -H "Content-Type: application/json" -L --verbose -X POST http://localhost:8042/assets/buy-now
 ```
 
 ## SSL localhost
@@ -49,7 +49,7 @@ vi $PROJECT_ROOT/certs/domains.ext
 create certificates - see domains.ext
 
 ```
-openssl req -new -nodes -newkey rsa:2048 -keyout assets.key -out assets.csr -subj "/C=UK/ST=Sussex/L=Brighton/O=Radicle-Certs/CN=radicle.local"
+openssl req -new -nodes -newkey rsa:2048 -keyout assets.key -out assets.csr -subj "/C=UK/ST=Sussex/L=Brighton/O=Radicle-Certs/CN=risidio.local"
 openssl x509 -req -sha256 -days 1024 -in assets.csr -CA RadicleCA.pem -CAkey RadicleCA.key -CAcreateserial -extfile domains.ext -out assets.crt
 ```
 
@@ -61,11 +61,11 @@ cd $PROJECT_ROOT/certs
 cp certs/assets.key certs/assets.crt ./volumes/certbot/local/.
 ```
 
-in the vhost file e.g. /etc/nginx/sites-enabled/radicle.local
+in the vhost file e.g. /etc/nginx/sites-enabled/risidio.local
 
 ```
 server {
-	server_name login.radicle.local;
+	server_name login.risidio.local;
   .
   .
 	ssl_certificate /var/certbot/local/assets.crt;

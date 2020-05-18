@@ -32,10 +32,25 @@ function __init_nginx() {
   # Enable all sites
   echo "Enabling sites $profile";
   #ln -sf "/etc/nginx/sites-available/assets.com" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/www.radicle.local" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/www.loopbomb.local" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/api.radicle.local" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/login.radicle.local" "/etc/nginx/sites-enabled"
+  echo "Enabling sites $profile";
+  if [ "$profile" == "production" ]; then
+	printf "\n- Linking Hume files \n";
+    ln -sf "/etc/nginx/sites-available/api.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/login.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/stax.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.dbid.io" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.loopbomb.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.radicle.art" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.risid.io" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/www.subs.risidio.com" "/etc/nginx/sites-enabled"
+  elif [ "$profile" == "staging" ]; then
+  	printf "\n- Linking Zeno files \n";
+    ln -sf "/etc/nginx/sites-available/test.loopbomb.com" "/etc/nginx/sites-enabled"
+  else
+  	printf "\n- No profile defined.. $profile \n";
+    ln -sf "/etc/nginx/sites-available/domains.local" "/etc/nginx/sites-enabled"
+  fi;
 
   echo "Site enablement completed";
   touch /var/log/access.log

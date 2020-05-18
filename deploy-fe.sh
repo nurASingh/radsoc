@@ -1,4 +1,4 @@
-#!/bin/bash -e
+risidio#!/bin/bash -e
 #
 ############################################################
 
@@ -63,7 +63,7 @@ cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
 cp ../fe-articles/dist/articles-entry.js $PATH_DEPLOY/.
 cp ../fe-lsat/dist/lsat-entry.js $PATH_DEPLOY/.
 
-rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/radicle402
+rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/risidio402
 
 printf "Finished....\n"
 printf "\n-----------------------------------------------------------------------------------------------------\n";

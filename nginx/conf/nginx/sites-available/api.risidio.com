@@ -1,7 +1,7 @@
 server {
   listen 80;
 	listen [::]:80;
-	server_name api.radicle.vote;
+	server_name api.risidio.com;
 	location ^~ /.well-known {
       allow all;
       root  /data/letsencrypt/;
@@ -11,7 +11,7 @@ server {
 	}
 }
 server {
-	server_name api.radicle.vote;
+	server_name api.risidio.com;
   listen 443 ssl http2;
  	listen [::]:443 ssl http2;
 	root /var/www/fallback;

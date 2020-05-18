@@ -1,7 +1,45 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name api.radicle.local;
+	server_name physical.risidio.local;
+	root /var/www/assets;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name digital.risidio.local;
+	root /var/www/assets;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name login.risidio.local;
+  include /etc/nginx/include.proxying;
+	location / {
+	    proxy_pass http://keycloak;
+  }
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name loopbomb.local;
+	root /var/www/loopbomb;
+	include /etc/nginx/include.proxying;
+	include /etc/nginx/include.cors;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
+	server_name api.risidio.local;
   include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
