@@ -52,6 +52,7 @@ printf "\n\n Connectiong to $SERVER.\n"
 ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd ~/hubgit/radsoc
   git pull
+  cp .env.production .env
 	docker login
   docker-compose -f docker-compose-images.yml pull
   docker-compose -f docker-compose-images.yml up -d
