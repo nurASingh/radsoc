@@ -1,6 +1,6 @@
 server {
 	listen 80;
-     	#listen   [::]:80 default ipv6only=on; ## listen for ipv6
+	listen [::]:80;
 	server_name test.loopbomb.com;
 	location ^~ /.well-known {
       allow all;

@@ -1,5 +1,6 @@
 server {
 	listen 80;
+	listen [::]:80;
 	server_name dbid.io www.dbid.io debid.io www.debid.io;
 	location ^~ /.well-known {
       allow all;
@@ -24,14 +25,14 @@ server {
 server {
 	server_name dbid.io;
 	root   /var/www/brightblock-dbid;
-	
+
 	listen [::]:443 ssl ipv6only=on; # managed by Certbot
     listen 443 ssl; # managed by Certbot
     ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
     ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
     include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
     ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
-    
+
 	underscores_in_headers on;
 	keepalive_timeout   70;
 	index  index.html index.htm;
@@ -43,7 +44,7 @@ server {
 	# Cors headers needed for blockstack to fetch manifest file!
 	location / {
 	   	try_files $uri $uri/ /index.html;
-		proxy_cache my_cache;		
+		proxy_cache my_cache;
 		add_header 'can\'t-be-evil' "true";
 		add_header 'Access-Control-Allow-Origin' "*" always;
 		add_header 'Access-Control-Allow-Credentials' 'true' always;

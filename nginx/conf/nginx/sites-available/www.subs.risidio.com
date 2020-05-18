@@ -1,5 +1,6 @@
 server {
 	listen 80;
+	listen [::]:80;
 	server_name vote.risidio.com;
 	location ^~ /.well-known {
       allow all;
@@ -11,6 +12,7 @@ server {
 }
 server {
 	listen 80;
+	listen [::]:80;
 	server_name digital.risidio.com;
 	location ^~ /.well-known {
       allow all;
@@ -22,6 +24,7 @@ server {
 }
 server {
 	listen 80;
+	listen [::]:80;
 	server_name physical.risidio.com;
 	location ^~ /.well-known {
       allow all;

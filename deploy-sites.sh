@@ -1,60 +1,30 @@
-#!/bin/bash -e
+risidio#!/bin/bash -e
 #
 ############################################################
 
-export SERVICE=$1
-export SERVER=hume.brightblock.org
-export DOCKER_ID_USER='mijoco'
-export DOCKER_COMPOSE_CMD='docker-compose'
-export DOCKER_CMD='docker'
-
-if [ "$SERVICE" == "all" ]; then
-  mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
-  mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
-  mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
-	docker-compose build
-	$DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
-	$DOCKER_CMD tag mijoco/radsoc_lsat mijoco/radsoc_lsat
-	$DOCKER_CMD tag mijoco/radsoc_mesh  mijoco/radsoc_mesh
-	$DOCKER_CMD tag mijoco/radsoc_nginx mijoco/radsoc_nginx
-
-	$DOCKER_CMD push mijoco/radsoc_assets:latest
-	$DOCKER_CMD push mijoco/radsoc_lsat:latest
-	$DOCKER_CMD push mijoco/radsoc_mesh:latest
-	$DOCKER_CMD push mijoco/radsoc_nginx:latest
-fi
-if [ "$SERVICE" == "assets" ]; then
-  mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
-	docker-compose build assets
-	$DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
-	$DOCKER_CMD push mijoco/radsoc_assets:latest
-fi
-if [ "$SERVICE" == "lsat" ]; then
-  mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
-	docker-compose build
-	$DOCKER_CMD tag mijoco/radsoc_lsat mijoco/radsoc_lsat
-	$DOCKER_CMD push mijoco/radsoc_lsat:latest
-fi
-if [ "$SERVICE" == "mesh" ]; then
-  mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
-	docker-compose build
-	$DOCKER_CMD tag mijoco/radsoc_mesh  mijoco/radsoc_mesh
-	$DOCKER_CMD push mijoco/radsoc_mesh:latest
-fi
-if [ "$SERVICE" == "nginx" ]; then
-	docker-compose build
-	$DOCKER_CMD tag mijoco/radsoc_nginx mijoco/radsoc_nginx
-	$DOCKER_CMD push mijoco/radsoc_nginx:latest
+export DEPLOYMENT=$1
+PATH_SITES=./nginx/conf/nginx/sites-available
+export SERVER=zeno.brightblock.org
+if [ "$DEPLOYMENT" == "prod" ]; then
+  SERVER=hume.brightblock.org;
 fi
 
-echo --- radsoc:copying to [ $PATH_DEPLOY ] --------------------------------------------------------------------------------;
-printf "\n\n Connectiong to $SERVER.\n"
-ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
-  cd ~/hubgit/radsoc
-  git pull
-	docker login
-  docker-compose -f docker-compose-images.yml pull
-  docker-compose -f docker-compose-images.yml up -d
+echo --- radsoc:copying to [ $PATH_SITES ] --------------------------------------------------------------------------------;
+
+rsync -aP -e "ssh  -p 7019" $PATH_SITES/* root@$SERVER:/etc/nginx/sites-available
+
+ssh -i ~/.ssh/id_rsa -p 7019 root@$SERVER "
+  cd /etc/nginx/sites-enabled
+  ln -sf "/etc/nginx/sites-available/api.risidio.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/login.risidio.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/stax.risidio.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.dbid.io" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.loopbomb.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.radicle.art" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.risid.io" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.risidio.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/www.subs.risidio.com" "/etc/nginx/sites-enabled"
+  ls -lt
 ";
 
 printf "Finished....\n"

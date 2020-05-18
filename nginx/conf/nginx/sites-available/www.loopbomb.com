@@ -1,5 +1,6 @@
 server {
 	listen 80;
+	listen [::]:80;
 	server_name loopbomb.com www.loopbomb.com;
 	location ^~ /.well-known {
       allow all;
@@ -24,6 +25,7 @@ server {
 server {
 	server_name loopbomb.com;
  	listen 443 ssl;
+	listen [::]:443 ssl http2;
 	root   /var/www/brightblock-loop;
 	underscores_in_headers on;
 
@@ -39,6 +41,12 @@ server {
 	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
 	error_page 404 /custom_404.html;
 
+	location ~* ^\/assets/(.*) {
+		proxy_pass http://assets;
+		include /etc/nginx/include.cors2;
+	}
+
+	# location for cloudinary image files!
 	location /mijo-enterprises {
 		root /var/www;
 	   	try_files $uri $uri/ /index.html;
@@ -52,7 +60,7 @@ server {
 	# Cors headers needed for blockstack to fetch manifest file!
 	location / {
 	   	try_files $uri $uri/ /index.html;
-		proxy_cache my_cache;		
+		proxy_cache my_cache;
 		add_header 'can\'t-be-evil' "true";
 		add_header 'Access-Control-Allow-Origin' "*" always;
 		add_header 'Access-Control-Allow-Credentials' 'true' always;

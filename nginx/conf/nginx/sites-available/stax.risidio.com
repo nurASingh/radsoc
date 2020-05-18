@@ -1,5 +1,6 @@
 server {
 	listen 80;
+	listen [::]:80;
 	server_name stax.risidio.com;
 	location ^~ /.well-known {
       allow all;
