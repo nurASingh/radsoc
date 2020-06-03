@@ -55,6 +55,7 @@ ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cp .env.production .env
 	docker login
   docker-compose -f docker-compose-images.yml pull
+  docker-compose -f docker-compose-images.yml down
   docker-compose -f docker-compose-images.yml up -d
 ";
 
