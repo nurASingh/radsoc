@@ -31,6 +31,7 @@ echo building images;
 echo -----------------------------------------------------------------------------------;
 cp .env.local .env
 docker-compose build $SERVICE
+docker-compose down
 docker-compose up -d
 
 if [ -z "${SERVICE}" ]; then
