@@ -36,6 +36,7 @@ function __init_nginx() {
   if [ "$profile" == "production" ]; then
 	printf "\n- Linking Hume files \n";
     ln -sf "/etc/nginx/sites-available/api.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/hubber.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/login.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/stax.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.dbid.io" "/etc/nginx/sites-enabled"
