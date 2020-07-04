@@ -37,6 +37,7 @@ server {
 server {
 	server_name vote.risidio.com;
  	listen 443 ssl;
+ 	listen [::]:443 ssl http2;
 	root   /var/www/risidio402;
   ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
   ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
@@ -64,6 +65,7 @@ server {
 server {
 	server_name physical.risidio.com;
  	listen 443 ssl;
+ 	listen [::]:443 ssl http2;
 	root   /var/www/risidio402;
   ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
   ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
@@ -91,6 +93,7 @@ server {
 server {
 	server_name digital.risidio.com;
  	listen 443 ssl;
+ 	listen [::]:443 ssl http2;
 	root   /var/www/risidio402;
   ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
   ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
