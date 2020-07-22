@@ -55,7 +55,7 @@ server {
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors;
+			include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/assets/(.*) {
 	    proxy_pass http://assets;
