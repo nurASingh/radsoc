@@ -50,6 +50,17 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
+	server_name meshnet.local;
+	root /var/www/meshnet;
+	include /etc/nginx/include.proxying;
+	include /etc/nginx/include.cors;
+	location / {
+		try_files $uri $uri/ /index.html;
+	}
+}
+server {
+	listen 80;
+	listen [::]:80;
 	server_name api.risidio.local;
   include /etc/nginx/include.proxying;
 

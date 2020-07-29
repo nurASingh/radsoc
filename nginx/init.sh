@@ -48,6 +48,8 @@ function __init_nginx() {
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
     ln -sf "/etc/nginx/sites-available/test.loopbomb.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/tstax.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/tapi.risidio.com" "/etc/nginx/sites-enabled"
   else
   	printf "\n- No profile defined.. $profile \n";
     ln -sf "/etc/nginx/sites-available/domains.local" "/etc/nginx/sites-enabled"
