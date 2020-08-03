@@ -46,7 +46,7 @@ cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
 pushd ../fe-lsat
 npm run build-prod
 popd;
-cp ../fe-lsat/dist/lsat-entry.js $PATH_DEPLOY/.
+cp ../fe-lsat/dist/lsat-entry*.js $PATH_DEPLOY/.
 
 pushd ../fe-articles
 npm run build-prod

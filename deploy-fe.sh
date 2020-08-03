@@ -61,7 +61,7 @@ cp ../fe-shellapp/dist/custom* $PATH_DEPLOY/../fallback
 cp -r ../fe-shellapp/dist/* $PATH_DEPLOY/.
 cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
 cp ../fe-articles/dist/articles-entry.js $PATH_DEPLOY/.
-cp ../fe-lsat/dist/lsat-entry.js $PATH_DEPLOY/.
+cp ../fe-lsat/dist/lsat-entry*.js $PATH_DEPLOY/.
 
 rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/risidio402
 
