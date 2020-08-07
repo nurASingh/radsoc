@@ -43,10 +43,10 @@ npm run build-prod
 popd;
 cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
 
-pushd ../fe-lsat
+pushd ../fe-rpay
 npm run build-prod
 popd;
-cp ../fe-lsat/dist/lsat-entry*.js $PATH_DEPLOY/.
+cp ../fe-rpay/dist/rpay-entry*.js $PATH_DEPLOY/.
 
 pushd ../fe-articles
 npm run build-prod

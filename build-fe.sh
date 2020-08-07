@@ -18,7 +18,7 @@ if [ -z "${SERVICE}" ]; then
   pushd ../fe-assets
   ./deploy.sh;
   popd;
-  pushd ../fe-lsat
+  pushd ../fe-rpay
   ./deploy.sh;
   popd;
   pushd ../fe-articles
@@ -37,7 +37,7 @@ if [ "$SERVICE" == "assets" ]; then
   popd;
 fi
 if [ "$SERVICE" == "lsat" ]; then
-  pushd ../fe-lsat
+  pushd ../fe-rpay
   ./deploy.sh;
   popd;
 fi

@@ -47,7 +47,7 @@ if [ -z "${SERVICE}" ]; then
   pushd ../fe-articles
     ./deploy.sh;
   popd;
-  pushd ../fe-lsat
+  pushd ../fe-rpay
     ./deploy.sh;
   popd;
 fi

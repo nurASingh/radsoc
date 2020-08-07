@@ -25,8 +25,8 @@ if [ -z "${SERVICE}" ]; then
 	npm run build-prod
 	popd;
 
-	pushd ../fe-lsat
-	echo --- fe-lsat:build-prod --------------------------------------------------------------------------------;
+	pushd ../fe-rpay
+	echo --- fe-rpay:build-prod --------------------------------------------------------------------------------;
 	npm run build-prod
 	popd;
 
@@ -43,9 +43,9 @@ if [ "$SERVICE" == "shellapp" ]; then
 	npm run build-prod
 	popd;
 fi
-if [ "$SERVICE" == "lsat" ]; then
-	pushd ../fe-lsat;
-  echo --- fe-lsat:build-prod --------------------------------------------------------------------------------;
+if [ "$SERVICE" == "rpay" ]; then
+	pushd ../fe-rpay;
+  echo --- fe-rpay:build-prod --------------------------------------------------------------------------------;
 	npm run build-prod
 	popd;
 fi
@@ -61,7 +61,7 @@ cp ../fe-shellapp/dist/custom* $PATH_DEPLOY/../fallback
 cp -r ../fe-shellapp/dist/* $PATH_DEPLOY/.
 cp ../fe-assets/dist/assets-entry.js $PATH_DEPLOY/.
 cp ../fe-articles/dist/articles-entry.js $PATH_DEPLOY/.
-cp ../fe-lsat/dist/lsat-entry*.js $PATH_DEPLOY/.
+cp ../fe-rpay/dist/rpay-entry*.js $PATH_DEPLOY/.
 
 rsync -aP -e "ssh  -p 7019" $PATH_DEPLOY/* bob@$SERVER:/var/www/risidio402
 

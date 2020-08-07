@@ -10,10 +10,37 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
-	server_name digital.risidio.local;
-	root /var/www/assets;
-	location / {
-		try_files $uri $uri/ /index.html;
+	server_name _;
+  include /etc/nginx/include.proxying;
+
+	location ~* ^\/mesh/(.*) {
+	    proxy_pass http://mesh;
+			include /etc/nginx/include.cors2;
+	}
+	location ~* ^\/assets/(.*) {
+	    proxy_pass http://assets;
+			include /etc/nginx/include.cors2;
+	}
+	location ~* ^\/lsat/ws1/(.*) {
+	  proxy_pass http://lsat;
+    include /etc/nginx/include.cors2;
+	}
+	location ~* ^\/lsat/(.*) {
+	    proxy_pass http://lsat;
+			include /etc/nginx/include.cors2;
+	}
+	location ~* ^\/(.*) {
+	    proxy_pass http://mesh;
+			include /etc/nginx/include.cors2;
+	}
+
+	error_page 404 /custom_404.html;
+	error_page 500 502 503 504 /custom_50x.html;
+	location ~* ^\/custom(.*) {
+		root /var/www/fallback;
+	}
+	location = /custom_50x.html {
+		root /var/www/fallback;
 	}
 }
 server {
