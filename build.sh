@@ -34,22 +34,4 @@ docker-compose build $SERVICE
 docker-compose down
 docker-compose up -d
 
-if [ -z "${SERVICE}" ]; then
-  echo -----------------------------------------------------------------------------------;
-  echo building micro front ends;
-  echo -----------------------------------------------------------------------------------;
-  pushd ../fe-shellapp;
-    ./deploy.sh;
-  popd;
-  pushd ../fe-assets
-    ./deploy.sh;
-  popd;
-  pushd ../fe-articles
-    ./deploy.sh;
-  popd;
-  pushd ../fe-rpay
-    ./deploy.sh;
-  popd;
-fi
-
 exit 0;
