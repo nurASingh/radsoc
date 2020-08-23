@@ -51,8 +51,8 @@ echo --- radsoc:copying to [ $PATH_DEPLOY ] ------------------------------------
 printf "\n\n Connectiong to $SERVER.\n"
 ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd /home/bob/hubgit/radsoc
-  git pull
-  cp .env.production .env
+  # git pull
+  # cp .env.production .env
   cat .env
   docker login
   docker-compose -f docker-compose-images.yml pull
