@@ -85,6 +85,7 @@ ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd ~/hubgit/radsoc
   git pull
 	cp .env.production .env
+  . ~/.profile
 	docker login
   docker-compose -f docker-compose-images.yml pull
   docker-compose -f docker-compose-images.yml down
