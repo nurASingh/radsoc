@@ -31,6 +31,10 @@ server {
 	    proxy_pass http://assets;
 			include /etc/nginx/include.cors2;
 	}
+	location ~* ^\/index/(.*) {
+	    proxy_pass http://search;
+			include /etc/nginx/include.cors2;
+	}
 	location ~* ^\/lsat/ws1/(.*) {
 	  proxy_pass http://lsat;
     include /etc/nginx/include.cors2;
@@ -39,10 +43,10 @@ server {
 	    proxy_pass http://lsat;
 			include /etc/nginx/include.cors2;
 	}
-	location ~* ^\/(.*) {
-	    proxy_pass http://keycloak;
-			include /etc/nginx/include.cors2;
-	}
+#	location ~* ^\/(.*) {
+#	    proxy_pass http://keycloak;
+#			include /etc/nginx/include.cors2;
+#	}
 
 	error_page 404 /custom_404.html;
 	location = /custom_404.html {

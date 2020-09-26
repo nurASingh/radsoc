@@ -24,7 +24,7 @@ server {
 	include /etc/nginx/include.proxying;
 	include /etc/nginx/include.cors;
 
-	location ~* ^\/(.*) {
-	    proxy_pass http://keycloak;
-	}
+#	location ~* ^\/(.*) {
+#	    proxy_pass http://keycloak;
+#	}
 }

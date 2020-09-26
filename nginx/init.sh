@@ -2,14 +2,14 @@
 set -e;
 
 export profile=$1
-filename='.env'
-n=1
-while read line; do
+#filename='.env'
+#n=1
+#while read line; do
   # reading each line
-  echo "Line No. $n : $line"
-  profile=$line
-  n=$((n+1))
-done < $filename
+#  echo "Line No. $n : $line"
+#  profile=$line
+#  n=$((n+1))
+#done < $filename
 
 function __init_nginx() {
   echo "Initialising Nginx. Timeout set to $__SERVICE_STARTUP_TIMEOUT";
@@ -47,6 +47,7 @@ function __init_nginx() {
     ln -sf "/etc/nginx/sites-available/www.subs.risidio.com" "/etc/nginx/sites-enabled"
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
+    ln -sf "/etc/nginx/sites-available/loopbomb.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/test.loopbomb.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/tstax.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/tapi.risidio.com" "/etc/nginx/sites-enabled"

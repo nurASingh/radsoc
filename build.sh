@@ -15,6 +15,7 @@ if [ -z "${SERVICE}" ]; then
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
   mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
+  mvn -f ../ms-search/pom.xml -Dmaven.test.skip=true clean install
 fi
 if [ "$SERVICE" == "assets" ]; then
   mvn -f ../ms-assets/pom.xml -Dmaven.test.skip=true clean install
@@ -24,6 +25,9 @@ if [ "$SERVICE" == "lsat" ]; then
 fi
 if [ "$SERVICE" == "mesh" ]; then
   mvn -f ../ms-mesh/pom.xml -Dmaven.test.skip=true clean install
+fi
+if [ "$SERVICE" == "search" ]; then
+  mvn -f ../ms-search/pom.xml -Dmaven.test.skip=true clean install
 fi
 
 echo \n\n\n-----------------------------------------------------------------------------------;
