@@ -75,21 +75,8 @@ services:
         - "8046:8080"
     links:
         - mongodb
-  mesh:
-    image: mijoco/radsoc_index:latest
-    container_name: "rs_index"
-    environment:
-        - spring.profiles.active=${spring_profiles_active}
-        - JAVA_OPTS=-Xm2g -Xms2g
-    ports:
-        - "8106:8106"
-        - "8048:8080"
-    links:
-        - mongodb
   search:
-    build:
-      context: ../ms-search
-    image: mijoco/radsoc_search
+    image: mijoco/radsoc_search:latest
     container_name: "rs_search"
     environment:
       - spring.profiles.active=${spring_profiles_active}
