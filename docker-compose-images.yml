@@ -78,6 +78,8 @@ services:
   search:
     image: mijoco/radsoc_search:latest
     container_name: "rs_search"
+    volumes:
+      - /var/index:/var/index
     environment:
       - spring.profiles.active=${spring_profiles_active}
       - JAVA_OPTS=-Xm2g -Xms2g

@@ -1,8 +1,8 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name physical.risidio.local;
-	root /var/www/assets;
+	server_name dcmarket.local;
+	root /var/www/dcmarket;
 	location / {
 		try_files $uri $uri/ /index.html;
 	}
@@ -138,31 +138,31 @@ server {
 	listen 80;
 	listen [::]:80;
 	server_name api.risidio.local;
-  include /etc/nginx/include.proxying;
+  	include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/assets/(.*) {
 	    proxy_pass http://assets;
-			include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/index/(.*) {
 	    proxy_pass http://search;
-			include /etc/nginx/include.cors;
+		include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/lsat/ws1/(.*) {
-	  proxy_pass http://lsat;
-    include /etc/nginx/include.cors2;
+	  	proxy_pass http://lsat;
+    	include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/lsat/(.*) {
 	    proxy_pass http://lsat;
-			include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors2;
 	}
 	location ~* ^\/(.*) {
 	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors2;
 	}
 
 	error_page 404 /custom_404.html;
