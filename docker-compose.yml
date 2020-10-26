@@ -98,3 +98,6 @@ services:
     ports:
       - "8106:8106"
       - "8048:8080"
+    links:
+      - mongodb
+  

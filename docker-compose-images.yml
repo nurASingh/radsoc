@@ -85,4 +85,7 @@ services:
       - JAVA_OPTS=-Xm2g -Xms2g
     ports:
       - "8106:8106"
-      - "8048:8080"      
+      - "8048:8080"
+    links:
+      - mongodb
+  

@@ -46,6 +46,7 @@ function __init_nginx() {
     ln -sf "/etc/nginx/sites-available/www.risid.io" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.subs.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/al.risidio.com" "/etc/nginx/sites-enabled"
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
     ln -sf "/etc/nginx/sites-available/dcmarket2.risidio.com" "/etc/nginx/sites-enabled"
