@@ -5,7 +5,7 @@ server {
 	location ^~ /.well-known {
       allow all;
       root  /data/letsencrypt/;
-  }
+  	}
 	location / {
       return 301 https://$host$request_uri;
 	}
