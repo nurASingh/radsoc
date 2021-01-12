@@ -17,7 +17,7 @@ ssh -i ~/.ssh/id_rsa -p 7019 root@$SERVER "
   cd /etc/nginx/sites-enabled
   ln -sf "/etc/nginx/sites-available/api.risidio.com" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/login.risidio.com" "/etc/nginx/sites-enabled"
-  ln -sf "/etc/nginx/sites-available/stax.risidio.com" "/etc/nginx/sites-enabled"
+  ln -sf "/etc/nginx/sites-available/stacks.risidio.com" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/www.dbid.io" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/www.loopbomb.com" "/etc/nginx/sites-enabled"
   ln -sf "/etc/nginx/sites-available/www.radicle.art" "/etc/nginx/sites-enabled"

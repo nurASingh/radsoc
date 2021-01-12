@@ -126,8 +126,8 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
-	server_name meshnet.local;
-	root /var/www/meshnet;
+	server_name stacksmate.local;
+	root /var/www/stacksmate;
 	include /etc/nginx/include.proxying;
 	include /etc/nginx/include.cors;
 	location / {

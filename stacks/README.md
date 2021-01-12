@@ -5,7 +5,7 @@
 [Run a Stacks Testnet Node](https://docs.blockstack.org/core/smart/neon-node.html).
 
 ```
-docker volume create stax-vol
+docker volume create stacks-vol
 ```
 
 

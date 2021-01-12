@@ -1,20 +1,30 @@
 server {
 	listen 80;
 	listen [::]:80;
-    server_name stax.risidio.com;
+  server_name stacksmate.com www.stacksmate.com;
 	location ^~ /.well-known {
         allow all;
       root  /data/letsencrypt/;
     }
 	location / {
-      return 301 https://stax.risidio.com$request_uri;
+      return 301 https://stacksmate.com$request_uri;
 	}
 }
 server {
-	server_name stax.risidio.com;
+ 	listen 443 ssl http2;
+ 	listen [::]:443 ssl http2;
+	server_name www.stacksmate.com;
+  ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
+  ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
+  include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
+  ssl_dhparam /etc/letsencrypt/ssl-dhparams.pem; # managed by Certbot
+	return 301 https://stacksmate.com$request_uri;
+}
+server {
+	server_name stacksmate.com;
  	listen 443 ssl;
  	listen [::]:443 ssl http2;
-	root   /var/www/meshnet;
+	root   /var/www/stacksmate;
   ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
   ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
   include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
