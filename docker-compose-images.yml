@@ -69,6 +69,15 @@ services:
     container_name: "rs_mesh"
     environment:
         - spring.profiles.active=${spring_profiles_active}
+        - SQUARE_APPLICATION_SECRET=${SQUARE_APPLICATION_SECRET}
+        - SQUARE_APPLICATION_ID=${SQUARE_APPLICATION_ID}
+        - SQUARE_LOCATION_ID=${SQUARE_LOCATION_ID}
+        - SQUARE_ACCESS_TOKEN=${SQUARE_ACCESS_TOKEN}
+        - OPENNODE_API_KEY=${OPENNODE_API_KEY}
+        - OPENNODE_ECOM_KEY=${OPENNODE_ECOM_KEY}
+        - CLOUDINARY_API_KEY=${CLOUDINARY_API_KEY}
+        - CLOUDINARY_API_SECRET=${CLOUDINARY_API_SECRET}
+        - CLOUDINARY_ENV_VAR=${CLOUDINARY_ENV_VAR}
         - JAVA_OPTS=-Xm2g -Xms2g
     ports:
         - "8104:8104"
