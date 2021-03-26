@@ -51,6 +51,7 @@ function __init_nginx() {
     ln -sf "/etc/nginx/sites-available/al.risidio.com" "/etc/nginx/sites-enabled"
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
+    ln -sf "/etc/nginx/sites-available/one.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/sounds.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/tvanilla.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/trpay.risidio.com" "/etc/nginx/sites-enabled"
