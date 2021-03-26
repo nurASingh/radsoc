@@ -1,20 +1,20 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name test.risidio.com;
+	server_name sounds.risidio.com;
 	location ^~ /.well-known {
       allow all;
       root  /data/letsencrypt/;
     }
 	location / {
-      return 301 https://test.risidio.com$request_uri;
+      return 301 https://sounds.risidio.com$request_uri;
 	}
 }
 server {
-	server_name test.risidio.com;
+	server_name sounds.risidio.com;
  	listen 443 ssl;
 	listen [::]:443 ssl http2;
-	root   /var/www/risidio;
+	root   /var/www/sounds;
 	underscores_in_headers on;
 
     ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot

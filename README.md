@@ -1,4 +1,6 @@
-# fe-appshell
+# radsoc
+
+Project for build docker images and running services - uses docker-compose
 
 ## Project setup
 

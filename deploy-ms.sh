@@ -3,6 +3,7 @@
 ############################################################
 
 export SERVICE=$1
+export DEPLOYMENT=$2
 export SERVER=zeno.brightblock.org
 if [ "$DEPLOYMENT" == "prod" ]; then
   SERVER=hume.brightblock.org;
