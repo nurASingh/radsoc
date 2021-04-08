@@ -35,6 +35,7 @@ function __init_nginx() {
   echo "Enabling sites $profile";
   if [ "$profile" == "production" ]; then
 	printf "\n- Linking Hume files \n";
+    ln -sf "/etc/nginx/sites-available/www.thisisnumberone.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/vanilla.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/rpay.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.stacksmate.com" "/etc/nginx/sites-enabled"
@@ -51,6 +52,7 @@ function __init_nginx() {
     ln -sf "/etc/nginx/sites-available/al.risidio.com" "/etc/nginx/sites-enabled"
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
+    ln -sf "/etc/nginx/sites-available/staging.thisisnumberone.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/one.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/sounds.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/tvanilla.risidio.com" "/etc/nginx/sites-enabled"
