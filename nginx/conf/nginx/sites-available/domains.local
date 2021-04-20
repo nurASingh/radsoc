@@ -1,8 +1,8 @@
 server {
 	listen 80;
 	listen [::]:80;
-	server_name dcmarket.local;
-	root /var/www/dcmarket;
+	server_name xchange.local;
+	root /var/www/xchange;
 	location / {
 		try_files $uri $uri/ /index.html;
 	}

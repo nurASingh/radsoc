@@ -36,14 +36,15 @@ function __init_nginx() {
   if [ "$profile" == "production" ]; then
 	printf "\n- Linking Hume files \n";
     ln -sf "/etc/nginx/sites-available/www.thisisnumberone.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/vanilla.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/ruma.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/rpay.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.stacksmate.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/dcmarket1.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/xchange.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/api.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/hubber.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/login.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.dbid.io" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/stacks.loopbomb.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.loopbomb.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.radicle.art" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/www.risid.io" "/etc/nginx/sites-enabled"
@@ -53,11 +54,9 @@ function __init_nginx() {
   elif [ "$profile" == "staging" ]; then
   	printf "\n- Linking Zeno files \n";
     ln -sf "/etc/nginx/sites-available/staging.thisisnumberone.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/one.risidio.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/sounds.risidio.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/tvanilla.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/truma.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/trpay.risidio.com" "/etc/nginx/sites-enabled"
-    ln -sf "/etc/nginx/sites-available/dcmarket2.risidio.com" "/etc/nginx/sites-enabled"
+    ln -sf "/etc/nginx/sites-available/tchange.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/loopbomb.risidio.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/test.loopbomb.com" "/etc/nginx/sites-enabled"
     ln -sf "/etc/nginx/sites-available/test.risidio.com" "/etc/nginx/sites-enabled"

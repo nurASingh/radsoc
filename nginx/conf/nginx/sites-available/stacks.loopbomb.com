@@ -1,20 +1,20 @@
 server {
 	listen 80;
 	listen [::]:80;
-    server_name dcmarket2.risidio.com;
+    server_name stacks.loopbomb.com;
 	location ^~ /.well-known {
         allow all;
       root  /data/letsencrypt/;
     }
 	location / {
-      return 301 https://dcmarket1.risidio.com$request_uri;
+      return 301 https://stacks.loopbomb.com$request_uri;
 	}
 }
 server {
-	server_name dcmarket2.risidio.com;
+	server_name stacks.loopbomb.com;
  	listen 443 ssl;
  	listen [::]:443 ssl http2;
-	root   /var/www/dcmarket;
+	root   /var/www/stackbomb;
   	ssl_certificate /etc/letsencrypt/live/radsoc-certs/fullchain.pem; # managed by Certbot
   	ssl_certificate_key /etc/letsencrypt/live/radsoc-certs/privkey.pem; # managed by Certbot
   	include /etc/letsencrypt/options-ssl-nginx.conf; # managed by Certbot
