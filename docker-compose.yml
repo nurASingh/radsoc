@@ -32,7 +32,7 @@ services:
       - ./volumes/certbot/www:/var/www/certbot
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
   mongodb:
-    image: mongo:latest
+    image: mongo:4.2
     container_name: "rs_mongodb"
     environment:
       - MONGO_DATA_DIR=/data/db
