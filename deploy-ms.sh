@@ -19,12 +19,14 @@ if [ "$SERVICE" == "all" ]; then
   mvn -f ../ms-search/pom.xml -Dmaven.test.skip=true clean install
 
 	docker-compose build
+	$DOCKER_CMD tag mijoco/stacksmate mijoco/stacksmate
 	$DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
 	$DOCKER_CMD tag mijoco/radsoc_lsat mijoco/radsoc_lsat
 	$DOCKER_CMD tag mijoco/radsoc_mesh  mijoco/radsoc_mesh
 	$DOCKER_CMD tag mijoco/radsoc_search  mijoco/radsoc_search
 	$DOCKER_CMD tag mijoco/radsoc_nginx mijoco/radsoc_nginx
 
+	$DOCKER_CMD push mijoco/stacksmate:latest
 	$DOCKER_CMD push mijoco/radsoc_assets:latest
 	$DOCKER_CMD push mijoco/radsoc_lsat:latest
 	$DOCKER_CMD push mijoco/radsoc_mesh:latest
@@ -36,6 +38,11 @@ if [ "$SERVICE" == "assets" ]; then
 	docker-compose build assets
 	$DOCKER_CMD tag mijoco/radsoc_assets mijoco/radsoc_assets
 	$DOCKER_CMD push mijoco/radsoc_assets:latest
+fi
+if [ "$SERVICE" == "stacksmate" ]; then
+	docker-compose build stacksmate
+	$DOCKER_CMD tag mijoco/stacksmate mijoco/stacksmate
+	$DOCKER_CMD push mijoco/stacksmate:latest
 fi
 if [ "$SERVICE" == "lsat" ]; then
   	mvn -f ../ms-lsat/pom.xml -Dmaven.test.skip=true clean install

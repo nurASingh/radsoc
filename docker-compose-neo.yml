@@ -5,6 +5,25 @@ volumes:
       driver: local
 
 services:
+  neo4j:
+    image: neo4j:4.3-community
+    container_name: "rs_neo4j"
+    restart: unless-stopped
+    ports:
+      - 7474:7474
+      - 7687:7687
+    volumes:
+      - ./volumes/neo4j/conf:/conf
+      - ./volumes/neo4j/data:/data
+      - ./volumes/neo4j/import:/import
+      - ./volumes/neo4j/logs:/logs
+      - ./volumes/neo4j/plugins:/plugins
+    environment: 
+      # Raise memory limits
+      - NEO4J_AUTH=neo4j/admin
+      - NEO4J_dbms_memory_pagecache_size=1G
+      - NEO4J_dbms.memory.heap.initial_size=1G
+      - NEO4J_dbms_memory_heap_max__size=1G
   nginx:
     build:
       context: ./nginx
@@ -58,18 +77,6 @@ services:
       - "8042:8080"
     links:
       - mongodb
-  stacksmate:
-    build:
-      context: ../ms-stacksmate
-    image: mijoco/stacksmate
-    container_name: "rs_stacksmate"
-    environment:
-      - RISIDIO_API=${RISIDIO_API}
-      - STACKS_NETWORK=${STACKS_NETWORK}
-      - STACKS_PUBKEY=${STACKS_PUBKEY}
-      - STACKS_PRIKEY=${STACKS_PRIKEY}
-    ports:
-      - "8108:8080"
   lsat:
     build:
       context: ../ms-lsat
@@ -106,6 +113,7 @@ services:
       - "8104:8104"
       - "8046:8080"
     links:
+      - neo4j
       - mongodb
   search:
     build:

@@ -51,6 +51,17 @@ services:
         - "8042:8080"
     links:
         - mongodb
+  stacksmate:
+    image: mijoco/stacksmate:latest
+    container_name: "rs_stacksmate"
+    environment:
+      - RISIDIO_API=${RISIDIO_API}
+      - STACKS_NETWORK=${STACKS_NETWORK}
+      - STACKS_PUBKEY=${STACKS_PUBKEY}
+      - STACKS_PRIKEY=${STACKS_PRIKEY}
+    ports:
+      - "8108:8080"
+
   lsat:
     image: mijoco/radsoc_lsat:latest
     container_name: "rs_lsat"
