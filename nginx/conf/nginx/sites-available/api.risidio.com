@@ -25,7 +25,11 @@ server {
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors;
+			include /etc/nginx/include-restricted.cors;
+	}
+	location ~* ^\/stacksmate/(.*) {
+	    proxy_pass http://stacksmate;
+			include /etc/nginx/include-restricted.cors;
 	}
 	location ~* ^\/assets/(.*) {
 	    proxy_pass http://assets;
