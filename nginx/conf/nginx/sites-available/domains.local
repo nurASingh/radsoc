@@ -10,151 +10,24 @@ server {
 server {
 	listen 80;
 	listen [::]:80;
-	server_name _;
-  include /etc/nginx/include.proxying;
-
-	location ~* ^\/mesh/(.*) {
-	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors2;
-	}
-	location ~* ^\/assets/(.*) {
-	    proxy_pass http://assets;
-			include /etc/nginx/include.cors2;
-	}
-	location ~* ^\/index/(.*) {
-	    proxy_pass http://search;
-			include /etc/nginx/include.cors2;
-	}
-	location ~* ^\/lsat/ws1/(.*) {
-	  proxy_pass http://lsat;
-    include /etc/nginx/include.cors2;
-	}
-	location ~* ^\/lsat/(.*) {
-	    proxy_pass http://lsat;
-			include /etc/nginx/include.cors2;
-	}
-	location ~* ^\/(.*) {
-	    proxy_pass http://mesh;
-			include /etc/nginx/include.cors2;
-	}
-
-	error_page 404 /custom_404.html;
-	error_page 500 502 503 504 /custom_50x.html;
-	location ~* ^\/custom(.*) {
-		root /var/www/fallback;
-	}
-	location = /custom_50x.html {
-		root /var/www/fallback;
-	}
-}
-#server {
-#	listen 80;
-#	listen [::]:80;
-#	server_name login.risidio.local;
-#  	include /etc/nginx/include.proxying;
-#	location / {
-#	    proxy_pass http://keycloak;
-#  }
-#}
-server {
-	listen 80;
-	listen [::]:80;
-	server_name loopbomb.local;
-	root /var/www/loopbomb;
-	include /etc/nginx/include.proxying;
-	include /etc/nginx/include.cors;
-	location / {
-		try_files $uri $uri/ /index.html;
-	}
-}
-server {
-	listen 80;
-	listen [::]:80;
-	server_name loopbomb.risidio.local;
-	root /var/www/loopbomb-dev;
-	index  index.html index.htm;
-	proxy_set_header X-Forwarded-Host $host;
-	proxy_set_header X-Forwarded-Server $host;
-	proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-	error_page 404 /custom_404.html;
-
-	location ~* ^\/assets/(.*) {
-		proxy_pass http://assets;
-		include /etc/nginx/include.cors2;
-	}
-
-	# location for cloudinary image files!
-	location /mijo-enterprises {
-		root /var/www;
-	   	try_files $uri $uri/ /index.html;
-		add_header 'can\'t-be-evil' "true";
-		proxy_set_header X-Forwarded-Host $host;
-		proxy_set_header X-Forwarded-Server $host;
-		proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-		#return 301 https://res.cloudinary.com$request_uri;
-	}
-
-	# Cors headers needed for blockstack to fetch manifest file!
-	location / {
-	   	try_files $uri $uri/ /index.html;
-		proxy_cache my_cache;
-		add_header 'can\'t-be-evil' "true";
-		add_header 'Access-Control-Allow-Origin' "*" always;
-		add_header 'Access-Control-Allow-Credentials' 'true' always;
-		add_header 'Access-Control-Allow-Methods' 'GET, POST, PUT, DELETE, OPTIONS' always;
-		add_header 'Access-Control-Allow-Headers' 'Accept,Authorization,Cache-Control,Content-Type,DNT,If-Modified-Since,Keep-Alive,Origin,User-Agent,X-Requested-With' always;
-	}
-	location = /custom_404.html {
-		internal;
-	}
-	error_page 500 502 503 504 /custom_50x.html;
-	location = /custom_50x.html {
-		internal;
-	}
-}
-server {
-	listen 80;
-	listen [::]:80;
-	server_name risidio.local;
-	root /var/www/risidio;
-	include /etc/nginx/include.proxying;
-	include /etc/nginx/include.cors;
-	location / {
-		try_files $uri $uri/ /index.html;
-	}
-}
-server {
-	listen 80;
-	listen [::]:80;
-	server_name stacksmate.local;
-	root /var/www/stacksmate;
-	include /etc/nginx/include.proxying;
-	include /etc/nginx/include.cors;
-	location / {
-		try_files $uri $uri/ /index.html;
-	}
-}
-server {
-	listen 80;
-	listen [::]:80;
 	server_name api.risidio.local;
   	include /etc/nginx/include.proxying;
 
 	location ~* ^\/mesh/(.*) {
 	    proxy_pass http://mesh;
-		include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors;
 	}
 	location ~* ^\/assets/(.*) {
 	    proxy_pass http://assets;
-		include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors;
 	}
 	location ~* ^\/index/(.*) {
 	    proxy_pass http://search;
-		include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors;
 	}
 	location ~* ^\/lsat/ws1/(.*) {
 	  	proxy_pass http://lsat;
-    	include /etc/nginx/include.cors2;
+		include /etc/nginx/include.cors;
 	}
 	error_page 404 /custom_404.html;
 	error_page 500 502 503 504 /custom_50x.html;
