@@ -15,7 +15,7 @@
 #
 
 set $cors '';
-if ($http_origin ~ '^https?://(localhost:8080|localhost:8081|localhost:8082|localhost:8083|localhost:8084|localhost:8085|localhost:8086|localhost:8087|staging\.thisisnumberone\.com|thisisnumberone\.com|test\.stacksmate\.com|stacksmate\.com|prom\.risidio\.com|stacks\.loopbomb\.com|loopbomb\.risidio\.com|truma\.risidio\.com|ruma\.risidio\.co|tchange\.risidio\.com|xchange\.risidio\.com)') {
+if ($http_origin ~ '^https?://(localhost:8080|localhost:8081|localhost:8082|localhost:8083|localhost:8084|localhost:8085|localhost:8086|localhost:8087|staging\.thisisnumberone\.com|thisisnumberone\.com|test\.stacksmate\.com|stacksmate\.com|prom\.risidio\.com|stacks\.loopbomb\.com|loopbomb\.risidio\.com|truma\.risidio\.com|ruma\.risidio\.co|tchange\.risidio\.com|xchange\.risidio\.com|rpay\.risidio\.com|trpay\.risidio\.com)') {
         set $cors 'true';
 }
 
