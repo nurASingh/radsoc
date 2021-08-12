@@ -34,8 +34,12 @@ echo \n\n\n---------------------------------------------------------------------
 echo building images;
 echo -----------------------------------------------------------------------------------;
 cp .env.local .env
-docker-compose build $SERVICE
-docker-compose down
-docker-compose up -d
+if [ -z "${SERVICE}" ]; then
+  docker-compose build $SERVICE
+  docker-compose down
+  docker-compose up -d
+else
+  docker-compose up --detach --build $SERVICE
+fi
 
 exit 0;
