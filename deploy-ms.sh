@@ -70,6 +70,8 @@ fi
 
 echo --- radsoc:copying to [ $PATH_DEPLOY ] --------------------------------------------------------------------------------;
 printf "\n\n Connectiong to $SERVER.\n"
+
+if [ -z "${SERVICE}" ]; then
 ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   cd /home/bob/hubgit/radsoc
   # git pull
@@ -81,6 +83,19 @@ ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
   docker-compose -f docker-compose-images.yml down
   docker-compose -f docker-compose-images.yml up -d
 ";
+else
+ssh -i ~/.ssh/id_rsa -p 7019 bob@$SERVER "
+  cd /home/bob/hubgit/radsoc
+  cat .env
+  docker login
+  . ~/.profile
+  docker-compose -f docker-compose-images.yml pull  
+  docker-compose -f docker-compose-images.yml stop $SERVICE
+  docker-compose -f docker-compose-images.yml rm $SERVICE 
+  docker-compose -f docker-compose-images.yml create $SERVICE
+  docker-compose -f docker-compose-images.yml start $SERVICE
+";
+fi
 
 printf "Finished....\n"
 printf "\n-----------------------------------------------------------------------------------------------------\n";
