@@ -6,9 +6,7 @@ volumes:
 
 services:
   nginx:
-    build:
-      context: ./nginx
-    image: mijoco/radsoc_nginx
+    image: arunsingh/ms-nginx
     restart: unless-stopped
     container_name: "rs_nginx"
     ports:
@@ -21,7 +19,6 @@ services:
       - ./volumes/certbot:/var/certbot
     links:
       - assets
-      - lsat
       - mesh
       - search
         #command: "/bin/sh -c 'while :; do sleep 6h & wait $${!}; nginx -s reload; done & nginx -g \"daemon off;\"'"
@@ -46,9 +43,7 @@ services:
       - 27019:27017
     command: mongod --bind_ip_all --logpath=/dev/null
   assets:
-    build:
-      context: ../ms-assets
-    image: mijoco/radsoc_assets
+    image: arunsingh/ms-assets
     container_name: "rs_assets"
     environment:
       - spring.profiles.active=${spring_profiles_active}
@@ -58,37 +53,8 @@ services:
       - "8042:8080"
     links:
       - mongodb
-  stacksmate:
-    build:
-      context: ../ms-stacksmate
-    image: mijoco/stacksmate
-    container_name: "rs_stacksmate"
-    environment:
-      - RISIDIO_API=${RISIDIO_API}
-      - STACKS_NETWORK=${STACKS_NETWORK}
-      - STACKS_PUBKEY=${STACKS_PUBKEY}
-      - STACKS_PRIKEY=${STACKS_PRIKEY}
-    ports:
-      - "8108:8080"
-  lsat:
-    build:
-      context: ../ms-lsat
-    image: mijoco/radsoc_lsat
-    container_name: "rs_lsat"
-    environment:
-      - spring.profiles.active=${spring_profiles_active}
-      - JAVA_OPTS=-Xm2g -Xms2g
-      - BTC_ACCESS_KEY_ID=${BTC_ACCESS_KEY_ID}
-      - WPHRASE=${WPHRASE}
-    ports:
-      - "8102:8102"
-      - "8044:8080"
-    links:
-      - mongodb
   mesh:
-    build:
-      context: ../ms-mesh
-    image: mijoco/radsoc_mesh
+    image: arunsingh/ms-mesh
     container_name: "rs_mesh"
     environment:
       - spring.profiles.active=${spring_profiles_active}
@@ -113,9 +79,7 @@ services:
     links:
       - mongodb
   search:
-    build:
-      context: ../ms-search
-    image: mijoco/radsoc_search
+    image: arunsingh/ms-search
     container_name: "rs_search"
     volumes:
       - /var/index:/var/index
