@@ -15,4 +15,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Build the Docker image 
-      run: cd nginx && docker build . --file Dockerfile --tag arunsingh/ms-nginx:latest
+      run: cd nginx && docker build . --file Dockerfile --tag arunsingh/ms-nginx:latest 
+    - name: Docker Login  
+      username: arunsingh
+      password: f17d4b70-4bfe-4c15-95fd-f622ffdfabfb
+    - name: Build the Docker image 
+      run:  docker push arunsingh/ms-nginx:latest   
+      
