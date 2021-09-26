@@ -14,6 +14,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: cd nginx
-      run: docker build . --file Dockerfile --tag arunsingh/ms-nginx:latest
+    - name: Build the Docker image 
+      run: cd nginx && docker build . --file Dockerfile --tag arunsingh/ms-nginx:latest
