@@ -18,8 +18,9 @@ jobs:
       run: cd nginx && docker build . --file Dockerfile --tag arunsingh/ms-nginx:latest 
     - name: Docker Login  
       uses: docker/login-action@v1.10.0
-      username: arunsingh
-      password: f17d4b70-4bfe-4c15-95fd-f622ffdfabfb
+      with:
+        username: arunsingh
+        password: f17d4b70-4bfe-4c15-95fd-f622ffdfabfb
     - name: Build the Docker image 
       run:  docker push arunsingh/ms-nginx:latest   
       
